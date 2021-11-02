@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+left to right direction
+
+
+rectangle Player {
+    usecase "Registrate Team" as UCP1
+    usecase "Add Teammember" as UCP2
+    usecase "Delete Teammember" as UCP3
+    usecase "Delete Team" as UCP4
+}
+
+User --> UCP1
+User --> UCP2
+User --> UCP3
+User --> UCP4
+
+rectangle AdminSystem {
+    usecase "Create Tournamt" as UCAS1
+    usecase "Add Team" as UCAS2
+    usecase "Remove Team" as UCAS3
+    usecase "Change TeamConfig" as UCAS4
+    usecase "Create MatchProgram" as UCAS5
+    usecase "Change MatchConfig" as UCAS6
+    usecase "Registrate MatchResult" as UCAS7
+    usecase "View TeamRanking" as UCAS8
+    usecase "View MatchProgram" as UCAS9
+}
+
+Admin --> UCAS1
+Admin --> UCAS2
+Admin --> UCAS3
+Admin --> UCAS4
+Admin --> UCAS5
+Admin --> UCAS6
+Admin --> UCAS7
+Admin --> UCAS8
+Admin --> UCAS9
+
+UCP1 -- Admin
+UCP2 -- Admin
+UCP3 -- Admin
+UCP4 -- Admin
+
+card Tournamt
+
+UCAS1 --> Tournamt
+UCAS2 --> Tournamt
+UCAS3 --> Tournamt
+UCAS4 --> Tournamt
+UCAS5 --> Tournamt
+UCAS6 --> Tournamt
+UCAS7 --> Tournamt
+UCAS8 --> Tournamt
+UCAS9 --> Tournamt
+
+
+
+@enduml

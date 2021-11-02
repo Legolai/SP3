@@ -1,7 +1,7 @@
 @startuml
 
 object Tournament
-object TurneringsHold
+object TournamentTeam
 object League
 object Match
 object MatchByTime
