@@ -1,0 +1,31 @@
+@startuml
+
+object Tournament
+object TurneringsHold
+object League
+object Match
+object MatchByTime
+object MatchByScore
+object MatchProgram
+object MatchResult
+object Sport
+object KnockOutTournament
+object GroupTournament
+object Group
+
+object Team
+object Player
+
+Team o-- Player
+Match <|-- MatchByScore
+Match <|-- MatchByTime
+
+Tournament <|-- KnockOutTournament
+Tournament <|-- GroupTournament
+Match o-- MatchResult
+MatchProgram o-- Match
+Group o-- Team
+GroupTournament o-- Group
+
+
+@enduml
