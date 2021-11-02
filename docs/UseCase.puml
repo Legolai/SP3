@@ -3,7 +3,7 @@
 left to right direction
 
 
-rectangle Player {
+rectangle PlayerSystem {
     usecase "Registrate Team" as UCP1
     usecase "Add Teammember" as UCP2
     usecase "Delete Teammember" as UCP3
@@ -26,6 +26,9 @@ rectangle AdminSystem {
     usecase "View TeamRanking" as UCAS8
     usecase "View MatchProgram" as UCAS9
 }
+
+UCAS1 .> UCAS5
+UCAS5 .> UCAS9
 
 Admin --> UCAS1
 Admin --> UCAS2

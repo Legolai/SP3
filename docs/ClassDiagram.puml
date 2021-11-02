@@ -1,19 +1,19 @@
 @startuml
 
-object Tournament
-object TournamentTeam
-object Match
-object MatchByTime
-object MatchByScore
-object MatchProgram
-object MatchResult
-object Sport
-object KnockOutTournament
-object GroupTournament
-object Group
+class Tournament
+class TournamentTeam
+class Match
+class MatchByTime
+class MatchByScore
+class MatchProgram
+class MatchResult
+class Sport
+class KnockOutTournament
+class GroupTournament
+class Group
 
-object Team
-object Player
+class Team
+class Player
 
 Team o-- Player
 Match <|-- MatchByScore
@@ -31,7 +31,5 @@ KnockOutTournament o-- Team
 
 KnockOutTournament o-- MatchProgram
 GroupTournament o-- MatchProgram
-
-
 
 @enduml
