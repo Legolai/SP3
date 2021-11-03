@@ -1,19 +1,151 @@
 @startuml
 
-class Tournament
-class TournamentTeam
-class Match
-class MatchByTime
-class MatchByScore
-class MatchProgram
-class MatchResult
-class Sport
-class KnockOutTournament
-class GroupTournament
-class Group
+class Program {
+    - UI ui
+    - ArrayList<Tournament> tournaments
+    - ArrayList<Team> newTeams
+    + void startup()
+    + void run()
+    - void quit()
+}
 
-class Team
-class Player
+
+class UI{
+    - Scanner sc
+    + void showTournament(Tournament tounament)
+    + void showAllTournaments()
+    + void showMatchProgram(Tournament tounament)
+    + void showGrandMatchProgram()
+    + void updateMatch(Tournament tounament, int ID)
+    + void createTeam(ArrayList<Team> newTeams)
+    + void createTournamemt()
+    + void readTournamentFromFile()
+    + void readFromFile(String path)
+    + void writeToFile(String path)
+}
+
+
+
+abstract class Tournament {
+     # Sport tournamentType
+     # ArrayList<Team> contenders
+     # MatchProgram program
+
+     + {abstract} void createMatchProgram(String matchType)
+     + {abstract} MatchProgram getMatchProgram()
+     + {abstract} String toString()
+     + {abstract} void viewTeamsRanking()
+     + {abstract} void viewTeams()
+}
+class Sport {
+    + String SPORTNAME
+    - ArrayList<String> rules
+
+    + ArrayList<String> getRules()
+    + void addRule()
+}
+class GroupTournament
+{
+    - ArrayList<Group> Groups
+
+    + void createMatchProgram(String matchType)
+    + MatchProgram getMatchProgram()
+    + String toString()
+    + void viewTeamsRanking()
+    + void viewTeams()
+}
+
+class TournamentTeam {
+    - Team team
+    - int point
+    - int score
+
+    + void addPoint()
+    + void addScore()
+}
+
+class Group {
+    ArrayList<TournamentTeam> members
+
+    + ArrayList<TournamentTeam> getMembers()
+    + void sortRanking()
+}
+
+class KnockOutTournament
+{
+
+    + void createMatchProgram(String matchType))
+    + MatchProgram getMatchProgram()
+    + String toString()
+    + void viewTeamsRanking()
+    + void viewTeams()
+}
+
+class Team {
+    - String name
+    - ArrayList<Player> teamMember
+
+    + String getName()
+    + void setName()
+    + ArrayList<Player> getMembers()
+}
+class Player {
+    - String name
+
+    + String getName()
+}
+
+class MatchProgram {
+    - ArrayList<Match> matchs
+
+    - void createMatch(Team HomeTeam, Team GuestTeam)
+    + void createMatchProgram()
+    + Match getMatchByID()
+    + void changeMatchContenders()
+    + String toString()
+}
+
+abstract class Match {
+    - MatchResult result
+    - Team[] teams
+    - Date date
+    - Team winner
+
+    + Date getDate()
+    + {abstract} void setResult(int HomeScore, int GuestScore)
+    + {abstract} int[] getScore()
+    - {abstract} void setWinner()
+    + {abstract} Team getWinner()
+}
+
+class MatchByTime {
+    - int minutes
+
+    + void setMinutes()
+    + int getMinutes()
+    + int[] getScore()
+    + void setResult(int HomeScore, int GuestScore)
+    - void setWinner()
+    + Team getWinner()
+}
+
+class MatchByScore {
+
+
+    + int[] getScore()
+    + void setResult(int HomeScore, int GuestScore)
+    - void setWinner()
+    + Team getWinner()
+}
+
+class MatchResult {
+    - int HomeScore
+    - int GuestScore
+
+    + void setResult(int HomeScore, int GuestScore)
+    + int[] calculateScore()
+}
+
 
 Team o-- Player
 Match <|-- MatchByScore
@@ -31,5 +163,7 @@ KnockOutTournament o-- Team
 
 KnockOutTournament o-- MatchProgram
 GroupTournament o-- MatchProgram
+
+Program o-- UI
 
 @enduml
