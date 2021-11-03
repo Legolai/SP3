@@ -1,9 +1,9 @@
-import java.util.ArrayList;
+import UI.Program;
 
 public class Main {
     public static void main(String[] args) {
-
-
-        System.out.println("hej verden");
+        Program app = new Program();
+        app.start();
+        app.run();
     }
 }
