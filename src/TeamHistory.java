@@ -2,20 +2,20 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class TeamHistory {
+
     private LinkedHashMap<String, Integer> teamStreak;
     private LinkedHashMap<String, Integer> tournamentHistoryResults;
-    private ArrayList<String> matches; //todo: change String to Match.
+    private ArrayList<Match> matches;
 
-    private void addMatch(String match){//todo: change String to Match
+    private void addMatch(Match match) {
         matches.add(match);
     }
 
-    public void addTournamentHistoryResults(){
-
-
+    public void addTournamentHistoryResults(String tournament, int ranking) {
+        tournamentHistoryResults.put(tournament, ranking);
     }
 
-    private void updateTeamStreak(){
+    private void updateTeamStreak() {
 
     }
 

@@ -7,11 +7,11 @@ public class TournamentTeam {
         this.team = team;
     }
 
-    public void addPoint(int amount) {
-        this.point = point + amount;
+    public void addPoint(int pointAmount) {
+        this.point = point + pointAmount;
     }
 
-    public void addScore(int amount) {
-        this.score = score + amount;
+    public void addScore(int scoreAmount) {
+        this.score = score + scoreAmount;
     }
 }
