@@ -16,15 +16,13 @@ public class KnockOutTournament extends Tournament{
 
     @Override
     public MatchProgram getMatchProgram() {
-        return null;
+        return program;
     }
 
     @Override
     public String viewTeamRankings() {
         return null;
     }
-
-
 
     @Override
     public void viewTeams() {
