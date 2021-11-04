@@ -7,6 +7,16 @@ public class Team {
     private ArrayList<Player> teamMembers;
     private TeamHistory history;
 
+    public Team(String name) {
+        this.name = name;
+        teamMembers = new ArrayList<>();
+        history = new TeamHistory();
+    }
+    public Team(String name, ArrayList<Player> teamMembers) {
+        this.name = name;
+        this.teamMembers = teamMembers;
+        history = new TeamHistory();
+    }
     public Team(String name, ArrayList<Player> teamMembers, TeamHistory history) {
         this.name = name;
         this.teamMembers = teamMembers;
@@ -16,7 +26,6 @@ public class Team {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -24,15 +33,16 @@ public class Team {
     public ArrayList<Player> getTeamMembers() {
         return teamMembers;
     }
-
     public void setTeamMembers(ArrayList<Player> teamMembers) {
         this.teamMembers = teamMembers;
+    }
+    public void addMember(Player a) {
+        teamMembers.add(a);
     }
 
     public TeamHistory getHistory() {
         return history;
     }
-
     public void setHistory(TeamHistory history) {
         this.history = history;
     }

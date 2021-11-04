@@ -2,7 +2,6 @@ package domain.tournament;
 
 import domain.team.Team;
 import domain.match.MatchProgram;
-
 import java.util.ArrayList;
 
 public abstract class Tournament {
