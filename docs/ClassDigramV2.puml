@@ -1,28 +1,57 @@
 @startuml
 
 class Program {
-    - UI ui
-    - ArrayList<Tournament> tournaments
-    - ArrayList<Team> newTeams
-    + void startup()
+   - boolean isRunning;
+   - ArrayList<Tournament> tournaments;
+   - ArrayList<Team> newTeams;
+   - UI ui;
+   - HashMap<String, Menu> menus;
+    + void start()
     + void run()
-    - mainMenu()
-    - tournamentsMenu()
-    - void quit()
+    + void quit()
 }
 
 
+
+abstract class Menu {
+    - String name
+    - String[] msgOptions
+    - UI ui
+    + void clearScreen()
+    - void updateMenus(HashMap<String, Menu> menus)
+    + void show(HashMap<String, Menu> menus)
+    + void show(HashMap<String, Menu> menus, String lastOptionKey)
+    # int getNumberOfOptions()
+}
+
+class QuitMenu {
+    Program app
+    + void show(HashMap<String, Menu> menus)
+}
+
+class MainMenu {
+    ArrayList<Tournament> tournaments
+    + void show(HashMap<String, Menu> menus)
+}
+
+class TournamentsMenu {
+    + void show(HashMap<String, Menu> menus)
+}
+
+class NewTournamentMenu {
+    + void show(HashMap<String, Menu> menus)
+}
+
 class UI{
-    - IO backendHandler
     - Scanner sc
-    + void showTournament(Tournament tounament)
-    + void showAllTournaments()
-    + void showMatchProgram(Tournament tounament)
-    + void showGrandMatchProgram()
-    + void updateMatch(Tournament tounament, int ID)
-    + void createTeam(ArrayList<Team> newTeams)
-    + void createTournamemt()
-    + void readTournamentFromFile()
+    + String getUserOption(String msg, int numOfValidOptions, String lastOptionKey)
+    + String getUserOption(String msg, String[] vaildOptions)
+    + String getUserInput(String msg)
+    + void printOptions(String[] msgOptions, String lastOptionKey)
+    + void newLine()
+    + void println(String msg)
+    + void print(String msg)
+    + void clear()
 }
 
 class IO{
@@ -30,10 +59,6 @@ class IO{
     + void readFromFile(String path)
     + void writeToFile(String path)
 }
-
-
-
-
 
 abstract class Tournament {
      # String name
@@ -57,7 +82,7 @@ class Sport {
 }
 class GroupTournament
 {
-    - ArrayList<Group> Groups
+    - ArrayList<Group> groups
     - KnockOutTournament finals
     + void createMatchProgram(String matchType)
     + MatchProgram getMatchProgram()
@@ -178,30 +203,44 @@ class MatchResult {
 }
 
 
-Team o-- Player
-Team o-- TeamHistory
+Team::members o-- Player
+Team::history o-- TeamHistory
 
 
+Match::result o-- MatchResult
+Match::winner o-- Team
 Match <|-- MatchByScore
 Match <|-- MatchByTime
 
-Tournament o-- Sport
-Tournament o-- TournametHistory
+Tournament::tournametHistoryResults o-- Sport
+Tournament::history o-- TournametHistory
+Tournament::program o-- MatchProgram
+Tournament::contenders o-- Team
 Tournament <|-- KnockOutTournament
 Tournament <|-- GroupTournament
-Match o-- MatchResult
-MatchProgram o-- Match
-Group o-- TournamentTeam
-GroupTournament o-- Group
-TournamentTeam o-- Team
-KnockOutTournament o-- Team
 
-KnockOutTournament o-- MatchProgram
-GroupTournament o-- MatchProgram
-GroupTournament o-- KnockOutTournament
+MatchProgram::matchs o-- Match
 
-Program o-- UI
-UI o-- IO
+
+Group::members o-- TournamentTeam
+GroupTournament::groups o-- Group
+GroupTournament::finals o-- KnockOutTournament
+
+TournamentTeam::team o-- Team
+TournametHistory::matchs o-- Match
+TeamHistory::matchs o-- Match
+
+Menu <|-- MainMenu
+Menu <|-- TournamentsMenu
+Menu <|-- NewTournamentMenu
+Menu <|-- QuitMenu
+
+Program --o QuitMenu::app
+Program::menus o-- Menu
+Program::ui o-- UI
+Program::tournaments o-- Tournament
+Program::newTeams o-- Team
+Menu::UI o-- UI
 
 
 @enduml

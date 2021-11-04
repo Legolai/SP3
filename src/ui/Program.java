@@ -1,68 +1,45 @@
 package ui;
 
+import domain.team.Team;
+import domain.tournament.*;
+import ui.menus.*;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Program {
-    private ArrayList<String> tournaments;
-    private ArrayList<String> newTeams;
+
     private boolean isRunning;
+    private ArrayList<Tournament> tournaments;
+    private ArrayList<Team> newTeams;
     private UI ui;
+    private HashMap<String, Menu> menus;
 
     public Program(){
-         tournaments =  new ArrayList<>();
-         newTeams = new ArrayList<>();
-         ui = new UI();
+        tournaments =  new ArrayList<>();
+        newTeams = new ArrayList<>();
+        ui = new UI();
+        menus = new HashMap<>();
     }
 
     public void start() {
-
+        menus.put("Home", new MainMenu("Home",tournaments));
+        menus.put("Tournaments", new TournamentsMenu("Tournaments"));
+        menus.put("New Tournament",  new NewTournamentMenu("New Tournament"));
+        menus.put("Quit", new QuitMenu("Quit",this));
+        menus.put("currMenu",  menus.get("Home"));
+        menus.put("prevMenu",  menus.get("Home"));
     }
 
     public void run() {
         isRunning = true;
         while(isRunning){
-           mainMenu();
-        }
-
-    }
-
-    private void mainMenu(){
-        ui.clear();
-        String[] options = {"1","2","3","4"};
-        ui.println("(1) " + "View tournaments" + (tournaments.isEmpty() ? "(not available)" : ""));
-        ui.println("(2) " + "Create tournament");
-        ui.println("(3) " + "");
-        ui.println("(4) " + "");
-        switch (ui.getUserOption("Input:" , options)){
-            case "1": {
-                if(!tournaments.isEmpty()) {
-                    mainMenu();
-                } else {
-                    tournamentsMenu();
-                }
-                break;
-            }
-            case "2": break;
-            case "3": break;
-            case "4": quit(); break;
+           menus.get("Home").show(menus);
         }
     }
 
-    private void tournamentsMenu(){
-        ui.clear();
-        String[] options = {"1","2","3"};
-        ui.println("(1) " + "View all tournaments");
-        ui.println("(2) " + "Select tournament");
-        ui.println("(3) " +"Go back");
-        switch (ui.getUserOption("Input:" , options)){
-            case "1": break;
-            case "2": break;
-            case "3": mainMenu(); break;
-        }
-    }
-
-    private void quit() {
-        ui.println("is quiting...");
+    public void quit() {
+        ui.println("The Program is quiting...");
         isRunning = false;
     }
 
