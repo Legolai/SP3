@@ -40,7 +40,6 @@ class GroupTest {
 
         player4 = new Player("Jesper");
         player5 = new Player("Tess");
-        team2 = new Team("Hold 2");
         team2.addMember(player4);
         team2.addMember(player5);
         tt2 = new TournamentTeam(team2);

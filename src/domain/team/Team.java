@@ -12,6 +12,7 @@ public class Team {
         this.teamMembers = teamMembers;
         history = new TeamHistory(this);
     }
+
     public Team(String name, ArrayList<Player> teamMembers, TeamHistory history) {
         this.name = name;
         this.teamMembers = teamMembers;
@@ -21,6 +22,7 @@ public class Team {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -28,9 +30,11 @@ public class Team {
     public ArrayList<Player> getTeamMembers() {
         return teamMembers;
     }
+
     public void setTeamMembers(ArrayList<Player> teamMembers) {
         this.teamMembers = teamMembers;
     }
+
     public void addMember(Player a) {
         teamMembers.add(a);
     }
@@ -38,7 +42,13 @@ public class Team {
     public TeamHistory getHistory() {
         return history;
     }
+
     public void setHistory(TeamHistory history) {
         this.history = history;
+    }
+
+    @Override
+    public String toString() {
+        return "Team: " + name + ", Players: " + teamMembers.toString() + ", " + history.getTeamStreak();
     }
 }

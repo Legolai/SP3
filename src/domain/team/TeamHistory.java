@@ -15,10 +15,14 @@ public class TeamHistory {
         teamStreak = new LinkedHashMap<>();
         tournamentHistoryResults = new LinkedHashMap<>();
         matches = new ArrayList<>();
-        this.team=team;
+        this.team = team;
     }
 
-    private void addMatch(Match match) {
+    public LinkedHashMap<String, Integer> getTeamStreak() {
+        return teamStreak;
+    }
+
+    public void addMatch(Match match) {
         matches.add(match);
         updateTeamStreak(match);
     }
@@ -29,20 +33,18 @@ public class TeamHistory {
 
     private void updateTeamStreak(Match match) {
         String s;
-            if(team.equals(match.getWinner())) {
-                s="Wins";
-            }else if(match.getWinner() == null) {
-                s = "Draws";
-            }else {
-                s = "Losses";
-            }
-                teamStreak.put(s, teamStreak.get(s) + 1);
+        if (team.equals(match.getWinner())) {
+            s = "Wins";
+        } else if (match.getWinner() == null) {
+            s = "Draws";
+        } else {
+            s = "Losses";
         }
+        teamStreak.put(s, teamStreak.get(s) + 1);
+    }
 
     @Override
     public String toString() { //todo: make more specific
-        return ", tournamentHistoryResults=" + tournamentHistoryResults +
-                ", matches=" + matches +
-                '}';
+        return teamStreak + ", " + tournamentHistoryResults + ", " + matches;
     }
 }
