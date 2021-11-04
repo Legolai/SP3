@@ -19,7 +19,9 @@ public class TeamHistory {
     }
 
     private void updateTeamStreak() {
-
+        for (Match match : matches ){
+            teamStreak.put("score:",match.getScore()[0]);
+        }
     }
 
     @Override
