@@ -1,7 +1,6 @@
 package domain.match;
 
-import domain.team.Team;
-
+import domain.team.*;
 import java.util.Date;
 
 public abstract class Match {
