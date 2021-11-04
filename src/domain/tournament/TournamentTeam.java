@@ -1,3 +1,7 @@
+package domain.tournament;
+
+import domain.team.Team;
+
 public class TournamentTeam {
     private Team team;
     private int point;

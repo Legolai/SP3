@@ -1,3 +1,5 @@
+package domain.tournament;
+
 import java.util.ArrayList;
 
 public class Sport {

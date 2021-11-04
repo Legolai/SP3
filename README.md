@@ -1,1 +1,1 @@
-# SP3 - Tournament Planning program
+# SP3 - domain.tournament.Tournament Planning program
