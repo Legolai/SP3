@@ -1,14 +1,15 @@
 package domain.team;
-
-import domain.match.Match;
+import domain.match.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class TeamHistory {
-
     private LinkedHashMap<String, Integer> teamStreak;
     private LinkedHashMap<String, Integer> tournamentHistoryResults;
     private ArrayList<Match> matches;
+
+    public TeamHistory() {
+    }
 
     private void addMatch(Match match) {
         matches.add(match);
