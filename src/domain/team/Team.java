@@ -17,15 +17,23 @@ public class Team {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public ArrayList<Player> getTeamMembers() {
         return teamMembers;
+    }
+
+    public void setTeamMembers(ArrayList<Player> teamMembers) {
+        this.teamMembers = teamMembers;
     }
 
     public TeamHistory getHistory() {
         return history;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHistory(TeamHistory history) {
+        this.history = history;
     }
 }
