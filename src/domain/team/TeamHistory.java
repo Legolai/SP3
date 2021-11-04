@@ -1,4 +1,5 @@
 package domain.team;
+
 import domain.match.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -8,7 +9,14 @@ public class TeamHistory {
     private LinkedHashMap<String, Integer> tournamentHistoryResults;
     private ArrayList<Match> matches;
 
-    public TeamHistory() {
+
+    public TeamHistory() { }
+
+    public TeamHistory(LinkedHashMap<String, Integer> teamStreak, LinkedHashMap<String, Integer> tournamentHistoryResults, ArrayList<Match> matches) {
+        this.teamStreak = teamStreak;
+        this.tournamentHistoryResults = tournamentHistoryResults;
+        this.matches = matches;
+
     }
 
     private void addMatch(Match match) {
@@ -20,7 +28,9 @@ public class TeamHistory {
     }
 
     private void updateTeamStreak() {
-
+        for (Match match : matches) {
+            teamStreak.put("score:", match.getScore()[0]);
+        }
     }
 
     @Override

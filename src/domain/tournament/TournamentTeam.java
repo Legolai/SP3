@@ -11,6 +11,18 @@ public class TournamentTeam {
         this.team = team;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
     public void addPoint(int pointAmount) {
         this.point = point + pointAmount;
     }
