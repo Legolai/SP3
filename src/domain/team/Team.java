@@ -7,15 +7,10 @@ public class Team {
     private ArrayList<Player> teamMembers;
     private TeamHistory history;
 
-    public Team(String name) {
-        this.name = name;
-        teamMembers = new ArrayList<>();
-        history = new TeamHistory();
-    }
     public Team(String name, ArrayList<Player> teamMembers) {
         this.name = name;
         this.teamMembers = teamMembers;
-        history = new TeamHistory();
+        history = new TeamHistory(this);
     }
     public Team(String name, ArrayList<Player> teamMembers, TeamHistory history) {
         this.name = name;
