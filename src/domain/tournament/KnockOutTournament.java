@@ -1,3 +1,7 @@
+package domain.tournament;
+
+import domain.team.Team;
+import domain.match.MatchProgram;
 import java.util.ArrayList;
 
 public class KnockOutTournament extends Tournament{

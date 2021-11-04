@@ -1,3 +1,7 @@
+package domain.match;
+
+import domain.team.Team;
+
 import java.util.Date;
 
 public class MatchByScore extends Match {
@@ -18,8 +22,7 @@ public class MatchByScore extends Match {
 
     @Override
     public int[] getScore() {
-        int[] scores = new int[]{homeScore, guestScore};
-        return scores;
+        return new int[]{homeScore, guestScore};
     }
 
 

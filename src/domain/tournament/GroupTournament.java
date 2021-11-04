@@ -1,3 +1,7 @@
+package domain.tournament;
+
+import domain.team.Team;
+import domain.match.MatchProgram;
 import java.util.ArrayList;
 
 public class GroupTournament extends Tournament{
@@ -7,7 +11,7 @@ public class GroupTournament extends Tournament{
 
     public GroupTournament(String name, Sport tournamentType, ArrayList<Team> contenders) {
         super(name, tournamentType, contenders);
-        groups = new ArrayList<Group>();
+        groups = new ArrayList<>();
         finals = new KnockOutTournament(name,tournamentType);   //new method to add contenders later on
     }
 

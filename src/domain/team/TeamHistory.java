@@ -1,3 +1,6 @@
+package domain.team;
+
+import domain.match.Match;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -21,7 +24,7 @@ public class TeamHistory {
 
     @Override
     public String toString() { //todo: make more specific
-        return "TeamHistory{" +
+        return "domain.Team.TeamHistory{" +
                 "teamStreak=" + teamStreak +
                 ", tournamentHistoryResults=" + tournamentHistoryResults +
                 ", matches=" + matches +

@@ -1,5 +1,8 @@
+package domain.match;
+
+import domain.team.Team;
+
 import java.util.Date;
-import java.util.Map;
 
 public abstract class Match {
 
@@ -18,9 +21,17 @@ public abstract class Match {
         return date;
     }
 
-    public abstract void setResult(int HomeScore, int GuestScore);
+    public void setResult(int homeScore, int guestScore) {
+        result.setResult(homeScore, guestScore);
+    }
 
-    public abstract int[] getScore();
+    public int[] getScore() {
+        return result.getScore();
+    }
+
+    public int[] getCalculatedScore() {
+        return result.calculateScore();
+    }
 
     public abstract void setWinner(Team winner);
 

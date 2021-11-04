@@ -1,4 +1,6 @@
-import UI.Program;
+package entries;
+
+import ui.Program;
 
 public class Main {
     public static void main(String[] args) {

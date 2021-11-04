@@ -1,3 +1,5 @@
+package domain.team;
+
 public class Player {
     private String name;
 
