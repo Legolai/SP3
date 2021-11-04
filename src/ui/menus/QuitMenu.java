@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class QuitMenu extends Menu {
     private final Program app;
 
-    public QuitMenu(String name,Program app) {
+    public QuitMenu(String name, Program app) {
         super(name);
         this.app = app;
     }

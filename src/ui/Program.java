@@ -34,7 +34,7 @@ public class Program {
     public void run() {
         isRunning = true;
         while(isRunning){
-           menus.get("Home").show(menus);
+            menus.get("Home").show(menus);
         }
     }
 
