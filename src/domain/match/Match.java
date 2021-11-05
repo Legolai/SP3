@@ -7,8 +7,8 @@ import java.util.Date;
 public abstract class Match {
 
     private MatchResult result;
-    private Team[] teams;
-    private Date date;
+    private final Team[] teams;
+    private final Date date;
     private Team winner;
 
 

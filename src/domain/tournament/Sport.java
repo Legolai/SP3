@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Sport {
     public String SPORTNAME;
-    private ArrayList<String> rules;
+    private final ArrayList<String> rules;
 
 
     public Sport(String SPORTNAME) {

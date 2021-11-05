@@ -27,7 +27,7 @@ public class UI {
         }
         validOptions[numOfValidOptions-1] = lastOptionKey;
         if (!Set.of(validOptions).contains(s)){
-            println("Unvaild input!");
+            print("(Unvaild input!) ");
             s = getUserOption(msg,validOptions);
         }
         return s.toLowerCase();
@@ -36,17 +36,25 @@ public class UI {
     public String getUserInput(String msg) {
         sc = new Scanner(System.in);
         print(msg + " ");
-        return sc.next();
+        return sc.nextLine();
+    }
+
+    public void waitForUser(String msg) {
+        sc = new Scanner(System.in);
+        print(msg + " ");
+        sc.nextLine();
     }
 
     public void printOptions(String[] msgOptions, String lastOptionKey){
+        newLine();
         for (int i = 0; i < msgOptions.length; i++) {
             if (i == msgOptions.length-1 && !lastOptionKey.equals("")) {
-                println("("+ lastOptionKey +")" + " " + msgOptions[i]);
+                println("("+ lastOptionKey.toUpperCase() +")" + " " + msgOptions[i]);
                 continue;
             }
             println("("+ (i+1) +")" + " " + msgOptions[i]);
         }
+        newLine();
     }
 
     public void println(String msg){

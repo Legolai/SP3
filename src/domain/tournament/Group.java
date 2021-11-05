@@ -3,7 +3,7 @@ package domain.tournament;
 import java.util.ArrayList;
 
 public class Group {
-    private ArrayList<TournamentTeam> members;
+    private final ArrayList<TournamentTeam> members;
 
     public Group() {
         members = new ArrayList<>();

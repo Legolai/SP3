@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Team {
     private String name;
-    private ArrayList<Player> teamMembers;
-    private TeamHistory history;
+    private final ArrayList<Player> teamMembers;
+    private final TeamHistory history;
 
     public Team(String name, ArrayList<Player> teamMembers, TeamHistory history) {
         this.name = name;
