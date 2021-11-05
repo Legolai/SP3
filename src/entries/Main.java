@@ -1,5 +1,6 @@
 package entries;
 
+
 import ui.Program;
 
 public class Main {
