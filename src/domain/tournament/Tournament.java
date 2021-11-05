@@ -40,4 +40,8 @@ public abstract class Tournament {
     public abstract String viewTeamRankings();
     public abstract void viewGroupRankings();
     public abstract ArrayList<Team> getContenders();
+
+    public String getName() {
+        return name;
+    }
 }

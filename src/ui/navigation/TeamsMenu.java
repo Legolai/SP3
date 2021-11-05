@@ -30,11 +30,12 @@ public class TeamsMenu extends Menu {
     }
 
     private void goToTeam(HashMap<String, Menu> navigation) {
-        String teamName = ui.getUserInput("Type team name: ");
+        String teamName = ui.getUserInput("Type the team's name: ").toLowerCase();
         if (teams.containsKey(teamName)) {
             ((TeamMenu) navigation.get("Team")).show(navigation, teams.get(teamName));
         } else {
             ui.println("The team " + teamName + " does not exist");
+            ui.waitForUser();
             show(navigation);
         }
     }
@@ -43,7 +44,7 @@ public class TeamsMenu extends Menu {
         for (String key: teams.keySet()) {
             ui.println(teams.get(key).getName());
         }
-        ui.waitForUser("Press enter to contiune.");
+        ui.waitForUser();
         show(navigation);
     }
 }

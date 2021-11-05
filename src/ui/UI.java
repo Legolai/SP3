@@ -27,7 +27,7 @@ public class UI {
         }
         validOptions[numOfValidOptions-1] = lastOptionKey;
         if (!Set.of(validOptions).contains(s)){
-            print("(Unvaild input!) ");
+            println("(Unvaild input!) ");
             s = getUserOption(msg,validOptions);
         }
         return s.toLowerCase();
@@ -44,6 +44,13 @@ public class UI {
         print(msg + " ");
         sc.nextLine();
     }
+
+    public void waitForUser() {
+        sc = new Scanner(System.in);
+        print("Press enter to continue. ");
+        sc.nextLine();
+    }
+
 
     public void printOptions(String[] msgOptions, String lastOptionKey){
         newLine();

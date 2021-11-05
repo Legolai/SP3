@@ -7,20 +7,19 @@ import ui.navigation.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Program {
 
     private boolean isRunning;
-    private ArrayList<Tournament> tournaments;
-    private final HashMap<String, Team> teams;
+    private HashMap<String, Tournament> tournaments;
+    private HashMap<String, Team> teams;
     private final UI ui;
     private final IO io;
     private final HashMap<String, Menu> navigation;
 
     public Program() {
-        tournaments = new ArrayList<>();
+        tournaments = new HashMap<>();
         teams = new HashMap<>();
         ui = new UI();
         io = new IO();
@@ -46,8 +45,9 @@ public class Program {
     }
 
     private void setupNavigtion() {
-        navigation.put("Home", new MainMenu("Home", true,tournaments));
+        navigation.put("Home", new MainMenu("Home", true));
         navigation.put("Tournaments", new TournamentsMenu("Tournaments", true, tournaments));
+        navigation.put("Tournament", new TournamentMenu("Tournament", false));
         navigation.put("New Tournament", new NewTournamentMenu("New Tournament", true ,tournaments));
         navigation.put("Teams", new TeamsMenu("Teams", true, teams));
         navigation.put("Team", new TeamMenu("Team", false));
@@ -59,7 +59,7 @@ public class Program {
 
     private void loadData() {
         try {
-            tournaments = io.loadTournaments("resources/tournaments.txt");
+            tournaments = io.loadTournaments("src/resources/tournaments.txt");
         } catch (FileNotFoundException e) {
             ui.println(e.getMessage());
         }
@@ -67,7 +67,7 @@ public class Program {
 
     private void saveData() {
         try {
-            io.saveTournamentsToFile("resources/text.txt", tournaments);
+            io.saveTournamentsToFile("src/resources/tournaments.txt", tournaments);
         } catch (IOException e) {
             ui.println(e.getMessage());
         }

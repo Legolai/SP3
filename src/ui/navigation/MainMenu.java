@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class MainMenu extends Menu {
 
-    public MainMenu(String name, boolean isHeaderShown,ArrayList<Tournament> tournaments) {
+    public MainMenu(String name, boolean isHeaderShown) {
         super(name, isHeaderShown, new String[]{
                 "View tournaments",
                 "Create tournament",

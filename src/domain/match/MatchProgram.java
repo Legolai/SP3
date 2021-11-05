@@ -88,7 +88,7 @@ public class MatchProgram {
         for (Match m : allmatches) {
             msg += m.toString() + "\n";
         }
-        return null;
+        return msg;
     }
 
 }
