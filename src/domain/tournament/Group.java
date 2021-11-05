@@ -3,7 +3,7 @@ package domain.tournament;
 import java.util.ArrayList;
 
 public class Group {
-    private final ArrayList<TournamentTeam> members;
+    private ArrayList<TournamentTeam> members;
 
     public Group() {
         members = new ArrayList<>();
@@ -12,12 +12,20 @@ public class Group {
         this.members = members;
     }
 
+
     public ArrayList<TournamentTeam> getMembers() {
-        return null;
+        return members;
     }
 
-    public void sortRanking() {     // should this be here?
-
+    public void setMembers(ArrayList<TournamentTeam> a) {
+        members = a;
     }
+    public void addMember(TournamentTeam a) {
+        members.add(a);
+    }
+
+
+    public void sortRanking() {
+    }   // should this be here?
 
 }

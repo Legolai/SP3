@@ -1,7 +1,6 @@
 package domain.match;
 
 import domain.team.Team;
-
 import java.util.Date;
 
 public class MatchByScore extends Match {

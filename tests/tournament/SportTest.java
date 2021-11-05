@@ -1,3 +1,5 @@
+package tournament;
+
 import domain.tournament.Sport;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
