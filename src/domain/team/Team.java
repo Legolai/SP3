@@ -46,4 +46,12 @@ public class Team {
     public void setHistory(TeamHistory history) {
         this.history = history;
     }
+
+    public String teamToString() {
+        String playerString = "";
+        for(Player p : teamMembers) {
+            playerString += "'"+p.getName()+"' ";
+        }
+        return "The team name is: ["+name+"] and it has the players: "+playerString;
+    }
 }
