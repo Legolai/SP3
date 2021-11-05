@@ -39,5 +39,5 @@ public abstract class Tournament {
     public abstract MatchProgram getMatchProgram();
     public abstract String viewTeamRankings();
     public abstract void viewGroupRankings();
-    public abstract void viewTeams();
+    public abstract ArrayList<Team> getContenders();
 }

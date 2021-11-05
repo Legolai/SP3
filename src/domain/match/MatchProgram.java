@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MatchProgram {
     private ArrayList<ArrayList<Match>> bracket;
-    private ArrayList<Match> allmatches;
+    private ArrayList<Match> allmatches;        // is this needed?
     private ArrayList<Team> teams;
     private int[] tourSize = {2,4,8,16,32,64};
     private String scoreOrTime = "";
@@ -31,6 +31,14 @@ public class MatchProgram {
     public void addTeam(Team team) {
         teams.add(team);
     }
+    public void removeTeam(String name) {
+        for (Team t : teams) {
+            if (t.getName().equals(name)) {
+                teams.remove(t);
+                break;
+            }
+        }
+    }
 
     public String createMatchProgram() {
         List<Integer> toursize = Arrays.stream(tourSize).boxed().toList();
@@ -41,7 +49,9 @@ public class MatchProgram {
         for (int i = 0; i < toursize.indexOf(nrOfTeams)+1; i++) {
             ArrayList<Match> a = new ArrayList<>();
             for (int j = 0; j < nrOfTeams/(2+i*2); j++) {
-                a.add(createEmptyMatch());
+                Match b = createEmptyMatch();
+                a.add(b);
+                allmatches.add(b);
             }
             bracket.add(a);
         }
@@ -74,6 +84,10 @@ public class MatchProgram {
 
     @Override
     public String toString() {
+        String msg = "";
+        for (Match m : allmatches) {
+            msg += m.toString() + "\n";
+        }
         return null;
     }
 
