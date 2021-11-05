@@ -55,7 +55,7 @@ public class NewTeamMenu extends Menu {
             }
         }
 
-        teams.put(teamName, new Team(teamName, members, new TeamHistory()));
+        teams.put(teamName, new Team(teamName, members));
 
         navigation.put("currMenu", navigation.get("Teams"));
         ((TeamMenu) navigation.get("Team")).show(navigation, teams.get(teamName));

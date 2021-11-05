@@ -29,15 +29,16 @@ class MatchProgramTest {
         a.add(player3);
         team6 = new Team("Hold 6",a);
 
+        ArrayList<Player> b = new ArrayList<>();
         player4 = new Player("Jesper");
         player5 = new Player("Tess");
-        team2 = new Team("Hold 2");
+        team2 = new Team("Hold 2", b);
         team2.addMember(player4);
         team2.addMember(player5);
 
         TemporaryTeamImporter test = new TemporaryTeamImporter();
         test.readFile();
-        System.out.println(test.teams.get(0).teamToString());
+        System.out.println(test.teams.get(0).toString());
 
     }
 

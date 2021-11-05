@@ -5,8 +5,8 @@ import java.util.Date;
 
 public abstract class Match {
     private MatchResult result;
-    private final Team[] teams;
-    private final Date date;
+    private Team[] teams;
+    private Date date;
     private Team winner;
 
     public Match() {
@@ -53,7 +53,7 @@ public abstract class Match {
 
     @Override
     public String toString() {
-        String msg = "";
+        String msg;
         if (winner == null) {
             msg = "This match is between ["+teams[0].getName()+"] and ["+teams[1].getName()+"]" +
                     " taking place the "+date.toString();
