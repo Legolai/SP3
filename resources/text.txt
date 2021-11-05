@@ -1,2 +1,2 @@
-domain.tournament.KnockOutTournament@4f3f5b24
-domain.tournament.KnockOutTournament@15aeb7ab
+domain.tournament.KnockOutTournament@16b98e56
+domain.tournament.KnockOutTournament@7ef20235

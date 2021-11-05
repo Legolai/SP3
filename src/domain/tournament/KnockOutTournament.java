@@ -15,7 +15,7 @@ public class KnockOutTournament extends Tournament{
 
     @Override
     public void createMatchProgram(String matchType) {
-
+        program.createMatchProgram();
     }
 
     @Override
@@ -29,8 +29,8 @@ public class KnockOutTournament extends Tournament{
     }
 
     @Override
-    public void viewTeams() {
-
+    public ArrayList<Team> getContenders() {
+        return contenders;
     }
 
 
