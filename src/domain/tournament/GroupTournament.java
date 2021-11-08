@@ -5,8 +5,8 @@ import domain.match.MatchProgram;
 import java.util.ArrayList;
 
 public class GroupTournament extends Tournament{
-    private ArrayList<Group> groups;
-    private KnockOutTournament finals;
+    private final ArrayList<Group> groups;
+    private final KnockOutTournament finals;
 
 
     public GroupTournament(String name, Sport tournamentType, ArrayList<Team> contenders) {

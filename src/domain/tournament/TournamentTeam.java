@@ -3,7 +3,7 @@ package domain.tournament;
 import domain.team.Team;
 
 public class TournamentTeam {
-    private Team team;
+    private final Team team;
     private int point;
     private int score;
 

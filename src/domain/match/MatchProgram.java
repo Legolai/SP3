@@ -12,8 +12,10 @@ public class MatchProgram {
     private ArrayList<Match> upcomingMatches;   // matches to be played, have to finish before next round
     private int currentRound;
     private ArrayList<Team> teams;
+
     //private ArrayList<Team> addedRemovedTeams;
     private int[] tourSize = {2,4,8,16,32,64};
+
     private String scoreOrTime = "";
 
     public MatchProgram() {
@@ -22,6 +24,7 @@ public class MatchProgram {
         teams = new ArrayList<>();
         //addedRemovedTeams = new ArrayList<>();
     }
+
     public MatchProgram(ArrayList<Team> teams) {
         knockoutBracket = new ArrayList<>();
         allMatches = new ArrayList<>();
@@ -36,6 +39,7 @@ public class MatchProgram {
     public void addTeam(Team team) {
         teams.add(team);
     }
+
     public void removeTeam(String name) {
         for (Team t : teams) {
             if (t.getName().equals(name)) {
@@ -44,6 +48,7 @@ public class MatchProgram {
             }
         }
     }
+
 
     public ArrayList<Match> getAllMatchesORUpcomingMatches(int x) {
         if (x == 0) {
@@ -73,15 +78,16 @@ public class MatchProgram {
         return "Succesfully advanced the tournament to round: "+(currentRound+1);
     }
 
+
     public String createMatchProgram() {
-        List<Integer> toursize = Arrays.stream(tourSize).boxed().toList();
+        List<Integer> toursize = (List<Integer>) Arrays.stream(tourSize).boxed();//toList();
         int nrOfTeams = teams.size();
         if (!toursize.contains(nrOfTeams)) {
             return "Not valid number of teams";
         }
-        for (int i = 0; i < toursize.indexOf(nrOfTeams)+1; i++) {
+        for (int i = 0; i < toursize.indexOf(nrOfTeams) + 1; i++) {
             ArrayList<Match> a = new ArrayList<>();
-            for (int j = 0; j < nrOfTeams/(2+i*2); j++) {
+            for (int j = 0; j < nrOfTeams / (2 + i * 2); j++) {
                 Match b = createEmptyMatch();
                 a.add(b);
                 allMatches.add(b);
@@ -91,11 +97,13 @@ public class MatchProgram {
         upcomingMatches = knockoutBracket.get(0);
         currentRound = 0;
         int counter = 0;
+
         for (Match m : upcomingMatches) {   // sets the first round of matches
             m.setTeams(teams.get(counter),teams.get(counter+1));
             counter += 2;
         }
         return "Matchprogram has been completed, and the first "+knockoutBracket.get(0).size()+
+
                 " matches have been scheduled (time yet to be set).";
     }
 
