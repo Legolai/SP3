@@ -25,9 +25,18 @@ public abstract class Match {
         result = new MatchResult();
     }
 
+    public Team getTeam(int i){     //i needs to be 0 or 1
+        return teams[i];
+    }
     public void setTeams(Team a, Team b) {
         teams[0] = a;
         teams[1] = b;
+    }
+    public void exchangeTeamX(Team a, int x) {      //x has to be 0 or 1
+        teams[x] = a;
+    }
+    public String homeAndGuestTeam() {
+        return "Team 0 is: "+teams[0].getName()+" and team 1 is: "+teams[1].getName();
     }
 
     public void setDate(Date date) {

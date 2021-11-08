@@ -4,8 +4,8 @@ import domain.team.Team;
 import java.util.Date;
 
 public class MatchByScore extends Match {
-    int guestScore;
-    int homeScore;
+    private int guestScore;
+    private int homeScore;
 
 
     public MatchByScore() {
@@ -28,6 +28,5 @@ public class MatchByScore extends Match {
     public int[] getScore() {
         return new int[]{homeScore, guestScore};
     }
-
 
 }
