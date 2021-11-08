@@ -48,8 +48,12 @@ public abstract class Match {
         return result.calculateScore();
     }
 
-    public abstract void setWinner(Team winner);
-    public abstract Team getWinner();
+    public void setWinner(Team winner) {
+        this.winner = winner;
+    }
+    public Team getWinner() {
+        return winner;
+    }
 
     @Override
     public String toString() {

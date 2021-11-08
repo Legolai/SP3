@@ -6,7 +6,6 @@ import java.util.Date;
 public class MatchByScore extends Match {
     int guestScore;
     int homeScore;
-    private Team winner;
 
 
     public MatchByScore() {
@@ -29,19 +28,6 @@ public class MatchByScore extends Match {
     public int[] getScore() {
         return new int[]{homeScore, guestScore};
     }
-
-
-    @Override
-    public void setWinner(Team winner) {
-        this.winner = winner;
-    }
-    @Override
-    public Team getWinner() {
-        return winner;
-    }
-
-
-
 
 
 }
