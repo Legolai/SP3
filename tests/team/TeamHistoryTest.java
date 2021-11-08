@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +30,8 @@ class TeamHistoryTest {
         team1 = new Team("Team 1", players);
         team2 = new Team("Team 2", players2);
         Team[] teams = {team1, team2};
-        match = new MatchByScore(teams, null);
+        Date date = new Date();
+        match = new MatchByScore(teams, date);
         match.setWinner(team1);
     }
 

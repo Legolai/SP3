@@ -43,6 +43,34 @@ public class TeamHistory {
         teamStreak.put(s, teamStreak.get(s) + 1);
     }
 
+    public void setTeamStreak(LinkedHashMap<String, Integer> teamStreak) {
+        this.teamStreak = teamStreak;
+    }
+
+    public LinkedHashMap<String, Integer> getTournamentHistoryResults() {
+        return tournamentHistoryResults;
+    }
+
+    public void setTournamentHistoryResults(LinkedHashMap<String, Integer> tournamentHistoryResults) {
+        this.tournamentHistoryResults = tournamentHistoryResults;
+    }
+
+    public ArrayList<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(ArrayList<Match> matches) {
+        this.matches = matches;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     @Override
     public String toString() { //todo: make more specific
         return teamStreak + ", " + tournamentHistoryResults + ", " + matches;
