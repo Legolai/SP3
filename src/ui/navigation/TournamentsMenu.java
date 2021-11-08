@@ -19,7 +19,7 @@ public class TournamentsMenu extends Menu {
     @Override
     public void show(Navigator navigation) {
         clearScreen();
-        super.showMenu( "b");
+        super.showMenu("b");
         switch (ui.getUserOption("Select menu: ", getNumberOfOptions(), "b")) {
             case "1" -> showAllTournaments(navigation);
             case "2" -> goToTournament(navigation);
@@ -39,9 +39,16 @@ public class TournamentsMenu extends Menu {
     }
 
     private void showAllTournaments(Navigator navigation) {
+        int columns = 0;
         for (String key : tournaments.keySet()) {
-            ui.println(tournaments.get(key).getName());
+            ui.print(tournaments.get(key).getName() + "," + (columns > 3 ? "\n" : " "));
+            if (columns > 3) {
+                columns = 0;
+                continue;
+            }
+            ++columns;
         }
+        ui.newLine();
         ui.waitForUser();
         show(navigation);
     }

@@ -59,6 +59,7 @@ public class Program {
     private void loadData() {
         try {
             tournaments = io.loadTournaments("src/resources/tournaments.txt");
+            teams = io.loadTeams("src/resources/teams.txt");
         } catch (FileNotFoundException e) {
             ui.println(e.getMessage());
         }

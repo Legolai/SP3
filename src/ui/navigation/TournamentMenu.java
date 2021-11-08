@@ -3,8 +3,6 @@ package ui.navigation;
 import domain.team.Team;
 import domain.tournament.Tournament;
 
-import java.util.HashMap;
-
 public class TournamentMenu extends Menu {
     Tournament tournament;
 
@@ -12,7 +10,9 @@ public class TournamentMenu extends Menu {
         super(name, isHeaderShown, new String[]{
                 "View team ranking",
                 "View all contenders",
+                "Edit contenders",
                 "View match program",
+                "View bracket",
                 "Go back"
         });
     }
@@ -31,21 +31,43 @@ public class TournamentMenu extends Menu {
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "b")) {
             case "1" -> showRanking(navigation);
             case "2" -> showContenders(navigation);
-            case "3" -> showMatchProgram(navigation);
+            case "3" -> show(navigation, tournament);
+            case "4" -> showMatchProgram(navigation);
+            case "5" -> show(navigation, tournament);
             default -> navigation.goBack();
         }
     }
 
     private void showRanking(Navigator navigation) {
+        clearScreen();
         ui.println(tournament.getName());
+        ui.newLine();
+        ui.println("Team Ranking" + " ".repeat(10) + "| Points | Score |");
+        ui.println("-".repeat(40));
+        for (Team team: tournament.getContenders()) {
+            String teamName = team.getName();
+            String name = (teamName.length() > 20 ? teamName.substring(0,17)+"..." : teamName);
+            // TODO: handel score and point size and padding
+            ui.println("| " + name + " ".repeat(20 - name.length()) + "|"+ " ".repeat(3) + 0 + " ".repeat(4) +"|" + " ".repeat(3) + 0 + " ".repeat(3) + "|");
+            ui.println("-".repeat(40));
+        }
+        ui.newLine();
         ui.waitForUser();
         show(navigation, tournament);
     }
 
     private void showContenders(Navigator navigation) {
+        int columns = 0;
+        ui.newLine();
         for (Team team : tournament.getContenders()) {
-            ui.println(team.getName());
+            ui.print(team.getName() + "," + (columns > 4 ? "\n" : " "));
+            if (columns > 4) {
+                columns = 0;
+                continue;
+            }
+            ++columns;
         }
+        ui.newLine();
         ui.waitForUser();
         show(navigation, tournament);
     }

@@ -42,7 +42,7 @@ public class UI {
 
     public void waitForUser() {
         sc = new Scanner(System.in);
-        print("Press enter to continue. ");
+        println("Press enter to continue. ");
         sc.nextLine();
     }
 
@@ -85,7 +85,7 @@ public class UI {
                 startProcess.waitFor();
             }
         }catch(Exception e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }
