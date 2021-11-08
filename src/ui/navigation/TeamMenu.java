@@ -18,20 +18,20 @@ public class TeamMenu extends Menu{
     }
 
     @Override
-    public void show(HashMap<String, Menu> navigation) {
+    public void show(Navigator navigation) {
 
     }
 
-    public void show(HashMap<String, Menu> navigation, Team team) {
+    public void show(Navigator navigation, Team team) {
         clearScreen();
         super.showCustomHeader(team.getName());
-        super.show(navigation, "b");
+        super.showMenu( "b");
 
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "b")) {
             case "1" -> show(navigation, team);
             case "2" -> show(navigation, team);
             case "3" -> show(navigation, team);
-            default -> navigation.get("prevMenu").show(navigation);
+            default -> navigation.goBack();
         }
     }
 }

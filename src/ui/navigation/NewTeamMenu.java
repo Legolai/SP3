@@ -20,16 +20,16 @@ public class NewTeamMenu extends Menu {
     }
 
     @Override
-    public void show(HashMap<String, Menu> navigation) {
+    public void show(Navigator navigation) {
         clearScreen();
-        super.show(navigation, "b");
+        super.showMenu( "b");
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "b")) {
             case "1" -> createNewTeam(navigation);
-            default -> navigation.get("prevMenu").show(navigation);
+            default -> navigation.goBack();
         }
     }
 
-    private void createNewTeam(HashMap<String, Menu> navigation) {
+    private void createNewTeam(Navigator navigation) {
         clearScreen();
         String teamName = ui.getUserInput("Type the new team name:");
         ArrayList<Player> members = new ArrayList<>();
@@ -55,10 +55,10 @@ public class NewTeamMenu extends Menu {
             }
         }
 
-        teams.put(teamName, new Team(teamName, members));
+        teams.put(teamName.toLowerCase(), new Team(teamName, members));
 
-        navigation.put("currMenu", navigation.get("Teams"));
-        ((TeamMenu) navigation.get("Team")).show(navigation, teams.get(teamName));
+        navigation.setCurrentMenu("Teams");
+        ((TeamMenu) navigation.goManuelTo("Team")).show(navigation, teams.get(teamName.toLowerCase()));
     }
 
     private Player createPlayer() {

@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class MainMenu extends Menu {
 
-    public MainMenu(String name, boolean isHeaderShown,ArrayList<Tournament> tournaments) {
+    public MainMenu(String name, boolean isHeaderShown) {
         super(name, isHeaderShown, new String[]{
                 "View tournaments",
                 "Create tournament",
@@ -18,15 +18,15 @@ public class MainMenu extends Menu {
     }
 
     @Override
-    public void show(HashMap<String, Menu> navigation) {
+    public void show(Navigator navigation) {
         clearScreen();
-        super.show(navigation, "q");
+        super.showMenu( "q");
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "q")) {
-            case "1" -> navigation.get("Tournaments").show(navigation);
-            case "2" -> navigation.get("New Tournament").show(navigation);
-            case "3" -> navigation.get("Teams").show(navigation);
-            case "4" -> navigation.get("New Team").show(navigation);
-            default -> navigation.get("Quit").show(navigation);
+            case "1" -> navigation.goTo("Tournaments");
+            case "2" -> navigation.goTo("New Tournament");
+            case "3" -> navigation.goTo("Teams");
+            case "4" -> navigation.goTo("New Team");
+            default -> navigation.goTo("Quit");
         }
     }
 }
