@@ -1,7 +1,6 @@
 package team;
 
 import domain.match.Match;
-import domain.match.MatchByScore;
 import domain.team.Player;
 import domain.team.Team;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +30,7 @@ class TeamHistoryTest {
         team2 = new Team("Team 2", players2);
         Team[] teams = {team1, team2};
         Date date = new Date();
-        match = new MatchByScore(teams, date);
+        match = new Match(teams, date);
         match.setWinner(team1);
     }
 

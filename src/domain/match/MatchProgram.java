@@ -12,10 +12,8 @@ public class MatchProgram {
     private ArrayList<Match> upcomingMatches;   // matches to be played, have to finish before next round
     private int currentRound;
     private ArrayList<Team> teams;
-
     //private ArrayList<Team> addedRemovedTeams;
     private int[] tourSize = {2,4,8,16,32,64};
-
     private String scoreOrTime = "";
 
     public MatchProgram() {
@@ -24,7 +22,6 @@ public class MatchProgram {
         teams = new ArrayList<>();
         //addedRemovedTeams = new ArrayList<>();
     }
-
     public MatchProgram(ArrayList<Team> teams) {
         knockoutBracket = new ArrayList<>();
         allMatches = new ArrayList<>();
@@ -32,14 +29,13 @@ public class MatchProgram {
         //addedRemovedTeams = new ArrayList<>();
     }
 
-    public void setMatchType(String a) {    //a should be 'score' or 'time'
+    public void setMatchType(String a) {
         scoreOrTime = a;
-    }
+    }   //a should be 'score' or 'time'
 
     public void addTeam(Team team) {
         teams.add(team);
     }
-
     public void removeTeam(String name) {
         for (Team t : teams) {
             if (t.getName().equals(name)) {
@@ -48,18 +44,26 @@ public class MatchProgram {
             }
         }
     }
+    public void removeTeam(Team team) {
+        for (Team t : teams) {
+            if (t.equals(team)) {
+                teams.remove(t);
+                break;
+            }
+        }
+    }
+    public ArrayList<Team> getTeams() {
+        return teams;
+    }
 
-
-    public ArrayList<Match> getAllMatchesORUpcomingMatches(int x) {
-        if (x == 0) {
+    public ArrayList<Match> getAllMatchesORUpcomingMatches(int ab) {
+        if (ab == 0) {
             return allMatches;
         } else {
             return upcomingMatches;
         }
     }   // x = 0 is allmatches x = 1 is upcoming
-    public ArrayList<Team> getTeams() {
-        return teams;
-    }
+
 
     public String advanceKnockoutTournament() {
         ArrayList<Team> wonTeams = new ArrayList<>();
@@ -109,7 +113,7 @@ public class MatchProgram {
 
     private Match createEmptyMatch() {
         if (scoreOrTime.equals("score")) {
-            return new MatchByScore();
+            return new Match();
         } else {
             return new MatchByTime();
         }
@@ -131,7 +135,7 @@ public class MatchProgram {
         checkIfInTeams(t);
     }
 
-    void checkIfInTeams(Team t) {      // adds team t if not found in the list teams
+    private void checkIfInTeams(Team t) {      // adds team t if not found in the list teams
         for(Team a : teams) {
             if (a.equals(t)) {      // team t already in teams, so just end method
                 return;

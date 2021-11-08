@@ -3,7 +3,7 @@ package domain.match;
 import domain.team.*;
 import java.util.Date;
 
-public abstract class Match {
+public class Match {
     private MatchResult result;
     private Team[] teams;
     private Date date;
@@ -49,7 +49,6 @@ public abstract class Match {
     public void setResult(int homeScore, int guestScore) {
         result.setResult(homeScore, guestScore);
     }
-
     public int[] getScore() {
         return result.getScore();
     }

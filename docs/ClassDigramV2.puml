@@ -211,12 +211,27 @@ package domain{
     }
     package match {
         class MatchProgram {
-            - ArrayList<Match> matchs
+            - ArrayList<ArrayList<Match>> knockoutBracket
+            - ArrayList<Match> allMatches
+            - ArrayList<Match> upcomingMatches
+            - int currentRound
+            - ArrayList<Team> teams
+            - int[] tourSize
+            - String scoreOrTIme
 
-            - void createMatch(Team HomeTeam, Team GuestTeam)
+            + void setMatchType(String matchType)
+            + void addTeam(Team team)
+            + void removeTeam(String name)
+            + void removeTeam(Team team)
+            + ArrayList<Team> getTeams()
+            + ArrayList<Match> getAllMatchesORUpcomingMatches(int ab)
+            + String advanceKnockoutTournament()
             + void createMatchProgram()
+            - Match createEmptyMatch()
+            + void switchTeams(Match m1, int t1, Match m2, int t2)
+            + void changeMatchContenders(Match m, team t, int ab)
+            - void checkIfInTeams(Team t)
             + Match getMatchByID()
-            + void changeMatchContenders()
             + String toString()
         }
 
@@ -226,11 +241,17 @@ package domain{
             - Date date
             - Team winner
 
+            + setTeams(Team a, Team b)
+            + exchangeTeamX(Team a, int x)
+            + String homeAndGuestTeam()
+            + setDate(Date date)
             + Date getDate()
-            + {abstract} void setResult(int HomeScore, int GuestScore)
-            + {abstract} int[] getScore()
-            - void setWinner()
+            + void setResult(int HomeScore, int GuestScore)
+            + int[] getScore()
+            + getCalculatedScore
+            + void setWinner()
             + Team getWinner()
+            + String toString()
         }
 
         class MatchByTime {
@@ -240,14 +261,6 @@ package domain{
             + int getMinutes()
             + int[] getScore()
             + void setResult(int HomeScore, int GuestScore)
-        }
-
-        class MatchByScore {
-            int guestScore
-            int homeScore
-
-            + void setResult(int HomeScore, int GuestScore)
-            + int[] getScore()
         }
 
         class MatchResult {
