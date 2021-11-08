@@ -16,14 +16,14 @@ public class Program {
     private HashMap<String, Team> teams;
     private final UI ui;
     private final IO io;
-    private final HashMap<String, Menu> navigation;
+    private Navigator navigation;
 
     public Program() {
         tournaments = new HashMap<>();
         teams = new HashMap<>();
         ui = new UI();
         io = new IO();
-        navigation = new HashMap<>();
+        navigation = new Navigator();
     }
 
     public void start() {
@@ -33,8 +33,9 @@ public class Program {
 
     public void run() {
         isRunning = true;
+        navigation.setCurrentMenu("Home");
         while (isRunning) {
-            navigation.get("Home").show(navigation);
+            navigation.goTo("Home");
         }
     }
 
@@ -45,16 +46,15 @@ public class Program {
     }
 
     private void setupNavigtion() {
-        navigation.put("Home", new MainMenu("Home", true));
-        navigation.put("Tournaments", new TournamentsMenu("Tournaments", true, tournaments));
-        navigation.put("Tournament", new TournamentMenu("Tournament", false));
-        navigation.put("New Tournament", new NewTournamentMenu("New Tournament", true ,tournaments));
-        navigation.put("Teams", new TeamsMenu("Teams", true, teams));
-        navigation.put("Team", new TeamMenu("Team", false));
-        navigation.put("New Team", new NewTeamMenu("New Team", true, teams));
-        navigation.put("Quit", new QuitMenu("Quit", false,this));
-        navigation.put("currMenu", null);
-        navigation.put("prevMenu", null);
+        navigation.addDestination("Home", new MainMenu("Home", true));
+        navigation.addDestination("Tournaments", new TournamentsMenu("Tournaments", true, tournaments));
+        navigation.addDestination("Tournament", new TournamentMenu("Tournament", false));
+        navigation.addDestination("New Tournament", new NewTournamentMenu("New Tournament", true ,tournaments));
+        navigation.addDestination("Teams", new TeamsMenu("Teams", true, teams));
+        navigation.addDestination("Team", new TeamMenu("Team", false));
+        navigation.addDestination("New Team", new NewTeamMenu("New Team", true, teams));
+        navigation.addDestination("Quit", new QuitMenu("Quit", false,this));
+
     }
 
     private void loadData() {

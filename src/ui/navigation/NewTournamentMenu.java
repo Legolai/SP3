@@ -19,17 +19,21 @@ public class NewTournamentMenu extends Menu {
     }
 
     @Override
-    public void show(HashMap<String, Menu> navigation) {
+    public void show(Navigator navigation) {
         clearScreen();
-        super.show(navigation, "b");
+        super.showMenu( "b");
         switch ((ui.getUserOption("Select menu: ", getNumberOfOptions(), "b"))) {
-            case "1" -> {
-                Tournament tn = createNewKnockOutTournament();
-                tournaments.put(tn.getName().toLowerCase(), tn);
-            }
+            case "1" -> showNewKnockOutTournament(navigation);
             case "2" -> show(navigation);
-            default -> navigation.get("prevMenu").show(navigation);
+            default -> navigation.goBack();
         }
+    }
+
+    private void showNewKnockOutTournament(Navigator navigation) {
+        Tournament tn = createNewKnockOutTournament();
+        tournaments.put(tn.getName().toLowerCase(), tn);
+        navigation.setCurrentMenu("Tournaments");
+        ((TournamentMenu) navigation.goManuelTo("Tournament")).show(navigation, tournaments.get(tn.getName().toLowerCase()));
     }
 
     private KnockOutTournament createNewKnockOutTournament() {

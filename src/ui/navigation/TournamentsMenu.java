@@ -17,20 +17,20 @@ public class TournamentsMenu extends Menu {
     }
 
     @Override
-    public void show(HashMap<String, Menu> navigation) {
+    public void show(Navigator navigation) {
         clearScreen();
-        super.show(navigation, "b");
+        super.showMenu( "b");
         switch (ui.getUserOption("Select menu: ", getNumberOfOptions(), "b")) {
             case "1" -> showAllTournaments(navigation);
             case "2" -> goToTournament(navigation);
-            default -> navigation.get("prevMenu").show(navigation);
+            default -> navigation.goBack();
         }
     }
 
-    private void goToTournament(HashMap<String, Menu> navigation) {
+    private void goToTournament(Navigator navigation) {
         String tournamentName = ui.getUserInput("Type the tournament's name: ").toLowerCase();
         if (tournaments.containsKey(tournamentName)) {
-            ((TournamentMenu) navigation.get("Tournament")).show(navigation, tournaments.get(tournamentName));
+            ((TournamentMenu) navigation.goManuelTo("Tournament")).show(navigation, tournaments.get(tournamentName));
         } else {
             ui.println("The tournament " + tournamentName + " does not exist");
             ui.waitForUser();
@@ -38,7 +38,7 @@ public class TournamentsMenu extends Menu {
         }
     }
 
-    private void showAllTournaments(HashMap<String, Menu> navigation) {
+    private void showAllTournaments(Navigator navigation) {
         for (String key : tournaments.keySet()) {
             ui.println(tournaments.get(key).getName());
         }

@@ -19,20 +19,20 @@ public class TeamsMenu extends Menu {
     }
 
     @Override
-    public void show(HashMap<String, Menu> navigation) {
+    public void show(Navigator navigation) {
         clearScreen();
-        super.show(navigation, "b");
+        super.showMenu( "b");
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "b")) {
             case "1" -> showAllTeams(navigation);
             case "2" -> goToTeam(navigation);
-            default -> navigation.get("prevMenu").show(navigation);
+            default -> navigation.goBack();
         }
     }
 
-    private void goToTeam(HashMap<String, Menu> navigation) {
+    private void goToTeam(Navigator navigation) {
         String teamName = ui.getUserInput("Type the team's name: ").toLowerCase();
         if (teams.containsKey(teamName)) {
-            ((TeamMenu) navigation.get("Team")).show(navigation, teams.get(teamName));
+            ((TeamMenu) navigation.goManuelTo("Team")).show(navigation, teams.get(teamName));
         } else {
             ui.println("The team " + teamName + " does not exist");
             ui.waitForUser();
@@ -40,7 +40,7 @@ public class TeamsMenu extends Menu {
         }
     }
 
-    private void showAllTeams(HashMap<String, Menu> navigation) {
+    private void showAllTeams(Navigator navigation) {
         for (String key: teams.keySet()) {
             ui.println(teams.get(key).getName());
         }

@@ -18,41 +18,41 @@ public class TournamentMenu extends Menu {
     }
 
     @Override
-    public void show(HashMap<String, Menu> navigation) {
+    public void show(Navigator navigation) {
 
     }
 
-    public void show(HashMap<String, Menu> navigation, Tournament tournament) {
+    public void show(Navigator navigation, Tournament tournament) {
         clearScreen();
         super.showCustomHeader(tournament.getName());
-        super.show(navigation, "b");
+        super.showMenu( "b");
         this.tournament = tournament;
 
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "b")) {
             case "1" -> showRanking(navigation);
             case "2" -> showContenders(navigation);
             case "3" -> showMatchProgram(navigation);
-            default -> navigation.get("prevMenu").show(navigation);
+            default -> navigation.goBack();
         }
     }
 
-    private void showRanking(HashMap<String, Menu> navigation) {
+    private void showRanking(Navigator navigation) {
         ui.println(tournament.getName());
-        ui.waitForUser("Press enter to continue.");
+        ui.waitForUser();
         show(navigation, tournament);
     }
 
-    private void showContenders(HashMap<String, Menu> navigation) {
+    private void showContenders(Navigator navigation) {
         for (Team team : tournament.getContenders()) {
             ui.println(team.getName());
         }
-        ui.waitForUser("Press enter to continue.");
+        ui.waitForUser();
         show(navigation, tournament);
     }
 
-    private void showMatchProgram(HashMap<String, Menu> navigation){
+    private void showMatchProgram(Navigator navigation){
         ui.println(tournament.getMatchProgram().toString());
-        ui.waitForUser("Press enter to continue.");
+        ui.waitForUser();
         show(navigation, tournament);
     }
 

@@ -13,11 +13,11 @@ public class QuitMenu extends Menu {
     }
 
     @Override
-    public void show(HashMap<String, Menu> navigation) {
-        super.show(navigation, "");
+    public void show(Navigator navigation) {
+        super.showMenu( "");
         switch ((ui.getUserOption("Are you sure you want to quit? (y/n)", new String[]{"y", "n"}))) {
             case "y" -> app.quit();
-            case "n" -> navigation.get("prevMenu").show(navigation);
+            case "n" -> navigation.goTo("MainMenu");
         }
     }
 }

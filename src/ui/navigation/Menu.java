@@ -31,13 +31,6 @@ public abstract class Menu {
         ui.clear();
     }
 
-    private void updateMenus(HashMap<String, Menu> navigation) {
-        if (navigation.get("currMenu") == null || !navigation.get("currMenu").equals(navigation.get(name))) {
-            navigation.put("prevMenu", navigation.get("currMenu"));
-            navigation.put("currMenu", navigation.get(name));
-        }
-    }
-
     private void showHeader() {
         if (isHeaderShown)
             ui.println("---| " + name + " |---");
@@ -53,15 +46,18 @@ public abstract class Menu {
         }
     }
 
-    public abstract void show(HashMap<String, Menu> navigation);
+    public abstract void show(Navigator navigation);
 
-    protected void show(HashMap<String, Menu> navigation, String lastOptionKey) {
+    protected void showMenu(String lastOptionKey) {
         showHeader();
-        updateMenus(navigation);
         showOptions(lastOptionKey);
     }
 
     protected int getNumberOfOptions() {
         return msgOptions.length;
+    }
+
+    public String getName() {
+        return name;
     }
 }
