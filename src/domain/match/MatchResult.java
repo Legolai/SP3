@@ -10,6 +10,7 @@ public class MatchResult {
         homeScore = 0;
         guestScore = 0;
     }
+
     public void setResult(int homeScore, int guestScore) {
         this.guestScore = guestScore;
         this.homeScore = homeScore;

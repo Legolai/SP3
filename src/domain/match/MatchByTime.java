@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class MatchByTime extends Match {
     private int minutes;
-    private Team winner;
     HashMap<String, Integer> teamScores = new HashMap<>();
 
 
@@ -30,12 +29,4 @@ public class MatchByTime extends Match {
         return minutes;
     }
 
-    @Override
-    public void setWinner(Team winner) {
-        this.winner = winner;
-    }
-    @Override
-    public Team getWinner() {
-        return winner;
-    }
 }

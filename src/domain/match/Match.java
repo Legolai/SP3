@@ -3,7 +3,7 @@ package domain.match;
 import domain.team.*;
 import java.util.Date;
 
-public abstract class Match {
+public class Match {
     private MatchResult result;
     private Team[] teams;
     private Date date;
@@ -25,9 +25,18 @@ public abstract class Match {
         result = new MatchResult();
     }
 
+    public Team getTeam(int i){     //i needs to be 0 or 1
+        return teams[i];
+    }
     public void setTeams(Team a, Team b) {
         teams[0] = a;
         teams[1] = b;
+    }
+    public void exchangeTeamX(Team a, int x) {      //x has to be 0 or 1
+        teams[x] = a;
+    }
+    public String homeAndGuestTeam() {
+        return "Team 0 is: "+teams[0].getName()+" and team 1 is: "+teams[1].getName();
     }
 
     public void setDate(Date date) {
@@ -40,7 +49,6 @@ public abstract class Match {
     public void setResult(int homeScore, int guestScore) {
         result.setResult(homeScore, guestScore);
     }
-
     public int[] getScore() {
         return result.getScore();
     }
@@ -48,8 +56,12 @@ public abstract class Match {
         return result.calculateScore();
     }
 
-    public abstract void setWinner(Team winner);
-    public abstract Team getWinner();
+    public void setWinner(Team winner) {
+        this.winner = winner;
+    }
+    public Team getWinner() {
+        return winner;
+    }
 
     @Override
     public String toString() {

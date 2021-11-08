@@ -175,19 +175,25 @@ package domain{
     package team{
         class Team {
             - String name
-            - ArrayList<Player> teamMember
+            - ArrayList<Player> teamMembers
             - TeamHistory history
 
-            + TeamHistory getHistory()
             + String getName()
-            + void setName()
+            + void setName(String name)
+            + ArrayList<Player> getTeamMembers()
+            + void setTeamMembers(ArrayList<Player> teamMembers)
+            + void addMember(Player a)
+            + TeamHistory getHistory()
+            + void setHistory(TeamHistory history)
+
             + ArrayList<Player> getMembers()
         }
 
         class TeamHistory {
             - LinkedMap<String, int> teamStreak
             - LinkedMap<String, int> tournametHistoryResults
-            - ArrayList<Match> matchs
+            - ArrayList<Match> matches
+            - Team team
 
             + void addMatch()
             + void addtournametHistoryResult()
@@ -199,16 +205,33 @@ package domain{
             - String name
 
             + String getName()
+            + String setName(String name)
+            + String toString()
         }
     }
     package match {
         class MatchProgram {
-            - ArrayList<Match> matchs
+            - ArrayList<ArrayList<Match>> knockoutBracket
+            - ArrayList<Match> allMatches
+            - ArrayList<Match> upcomingMatches
+            - int currentRound
+            - ArrayList<Team> teams
+            - int[] tourSize
+            - String scoreOrTIme
 
-            - void createMatch(Team HomeTeam, Team GuestTeam)
+            + void setMatchType(String matchType)
+            + void addTeam(Team team)
+            + void removeTeam(String name)
+            + void removeTeam(Team team)
+            + ArrayList<Team> getTeams()
+            + ArrayList<Match> getAllMatchesORUpcomingMatches(int ab)
+            + String advanceKnockoutTournament()
             + void createMatchProgram()
+            - Match createEmptyMatch()
+            + void switchTeams(Match m1, int t1, Match m2, int t2)
+            + void changeMatchContenders(Match m, team t, int ab)
+            - void checkIfInTeams(Team t)
             + Match getMatchByID()
-            + void changeMatchContenders()
             + String toString()
         }
 
@@ -218,11 +241,17 @@ package domain{
             - Date date
             - Team winner
 
+            + setTeams(Team a, Team b)
+            + exchangeTeamX(Team a, int x)
+            + String homeAndGuestTeam()
+            + setDate(Date date)
             + Date getDate()
-            + {abstract} void setResult(int HomeScore, int GuestScore)
-            + {abstract} int[] getScore()
-            - {abstract} void setWinner()
-            + {abstract} Team getWinner()
+            + void setResult(int HomeScore, int GuestScore)
+            + int[] getScore()
+            + getCalculatedScore
+            + void setWinner()
+            + Team getWinner()
+            + String toString()
         }
 
         class MatchByTime {
@@ -232,17 +261,6 @@ package domain{
             + int getMinutes()
             + int[] getScore()
             + void setResult(int HomeScore, int GuestScore)
-            - void setWinner()
-            + Team getWinner()
-        }
-
-        class MatchByScore {
-
-
-            + int[] getScore()
-            + void setResult(int HomeScore, int GuestScore)
-            - void setWinner()
-            + Team getWinner()
         }
 
         class MatchResult {
@@ -251,6 +269,7 @@ package domain{
 
             + void setResult(int HomeScore, int GuestScore)
             + int[] calculateScore()
+            + int[] getScore()
         }
     }
 }
