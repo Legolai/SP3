@@ -15,6 +15,7 @@ public class KnockOutTournament extends Tournament{
 
     @Override
     public void createMatchProgram(String matchType) {
+        program.setMatchType("score");      // for now it is score
         program.createMatchProgram();
     }
 
@@ -24,16 +25,16 @@ public class KnockOutTournament extends Tournament{
     }
 
     @Override
+    public ArrayList<Team> getContenders() {
+        return contenders;
+    }
+
+    @Override
     public String viewTeamRankings() {
         return null;
     }
 
     @Override
-    public ArrayList<Team> getContenders() {
-        return contenders;
-    }
-
-
-    @Override
     public void viewGroupRankings(){}   //not relevant so empty
+
 }
