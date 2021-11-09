@@ -7,24 +7,23 @@ import ui.navigation.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Program {
 
     private boolean isRunning;
-    private ArrayList<Tournament> tournaments;
-    private final HashMap<String, Team> teams;
+    private HashMap<String, Tournament> tournaments;
+    private HashMap<String, Team> teams;
     private final UI ui;
     private final IO io;
-    private final HashMap<String, Menu> navigation;
+    private Navigator navigation;
 
     public Program() {
-        tournaments = new ArrayList<>();
+        tournaments = new HashMap<>();
         teams = new HashMap<>();
         ui = new UI();
         io = new IO();
-        navigation = new HashMap<>();
+        navigation = new Navigator();
     }
 
     public void start() {
@@ -34,8 +33,9 @@ public class Program {
 
     public void run() {
         isRunning = true;
+        navigation.setCurrentMenu("Home");
         while (isRunning) {
-            navigation.get("Home").show(navigation);
+            navigation.goTo("Home");
         }
     }
 
@@ -46,20 +46,20 @@ public class Program {
     }
 
     private void setupNavigtion() {
-        navigation.put("Home", new MainMenu("Home", true,tournaments));
-        navigation.put("Tournaments", new TournamentsMenu("Tournaments", true, tournaments));
-        navigation.put("New Tournament", new NewTournamentMenu("New Tournament", true ,tournaments));
-        navigation.put("Teams", new TeamsMenu("Teams", true, teams));
-        navigation.put("Team", new TeamMenu("Team", false));
-        navigation.put("New Team", new NewTeamMenu("New Team", true, teams));
-        navigation.put("Quit", new QuitMenu("Quit", false,this));
-        navigation.put("currMenu", null);
-        navigation.put("prevMenu", null);
+        navigation.addDestination(new MainMenu("Home", true));
+        navigation.addDestination(new TournamentsMenu("Tournaments", true, tournaments));
+        navigation.addDestination(new TournamentMenu("Tournament", false));
+        navigation.addDestination(new NewTournamentMenu("New Tournament", true ,tournaments));
+        navigation.addDestination(new TeamsMenu("Teams", true, teams));
+        navigation.addDestination(new TeamMenu("Team", false));
+        navigation.addDestination(new NewTeamMenu("New Team", true, teams));
+        navigation.addDestination(new QuitMenu("Quit", false,this));
     }
 
     private void loadData() {
         try {
-            tournaments = io.loadTournaments("resources/tournaments.txt");
+            tournaments = io.loadTournaments("src/resources/tournaments.txt");
+            teams = io.loadTeams("src/resources/teams.txt");
         } catch (FileNotFoundException e) {
             ui.println(e.getMessage());
         }
@@ -67,7 +67,7 @@ public class Program {
 
     private void saveData() {
         try {
-            io.saveTournamentsToFile("resources/text.txt", tournaments);
+            io.saveTournamentsToFile("src/resources/tournaments.txt", tournaments);
         } catch (IOException e) {
             ui.println(e.getMessage());
         }

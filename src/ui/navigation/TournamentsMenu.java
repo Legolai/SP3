@@ -2,13 +2,12 @@ package ui.navigation;
 
 import domain.tournament.Tournament;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TournamentsMenu extends Menu {
-    ArrayList<Tournament> tournaments;
+    HashMap<String, Tournament> tournaments;
 
-    public TournamentsMenu(String name, boolean isHeaderShown, ArrayList<Tournament> tournaments) {
+    public TournamentsMenu(String name, boolean isHeaderShown, HashMap<String, Tournament> tournaments) {
         super(name, isHeaderShown, new String[]{
                 "View all tournaments",
                 "Select tournament",
@@ -18,21 +17,39 @@ public class TournamentsMenu extends Menu {
     }
 
     @Override
-    public void show(HashMap<String, Menu> navigation) {
+    public void show(Navigator navigation) {
         clearScreen();
-        super.show(navigation, "b");
+        super.showMenu("b");
         switch (ui.getUserOption("Select menu: ", getNumberOfOptions(), "b")) {
             case "1" -> showAllTournaments(navigation);
-            case "2" -> show(navigation);
-            default -> navigation.get("prevMenu").show(navigation);
+            case "2" -> goToTournament(navigation);
+            default -> navigation.goBack();
         }
     }
 
-    private void showAllTournaments(HashMap<String, Menu> navigation) {
-        for (Tournament tn : tournaments) {
-            ui.println(tn.toString());
+    private void goToTournament(Navigator navigation) {
+        String tournamentName = ui.getUserInput("Type the tournament's name: ").toLowerCase();
+        if (tournaments.containsKey(tournamentName)) {
+            ((TournamentMenu) navigation.goManuelTo("Tournament")).show(navigation, tournaments.get(tournamentName));
+        } else {
+            ui.println("The tournament " + tournamentName + " does not exist");
+            ui.waitForUser();
+            show(navigation);
         }
-        ui.waitForUser("Press enter to contiune.");
+    }
+
+    private void showAllTournaments(Navigator navigation) {
+        int columns = 0;
+        for (String key : tournaments.keySet()) {
+            ui.print(tournaments.get(key).getName() + "," + (columns > 3 ? "\n" : " "));
+            if (columns > 3) {
+                columns = 0;
+                continue;
+            }
+            ++columns;
+        }
+        ui.newLine();
+        ui.waitForUser();
         show(navigation);
     }
 
