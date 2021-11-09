@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public abstract class Tournament {
     protected String name;
     protected Sport tournamentType;
-    protected ArrayList<Team> contenders;
+    protected ArrayList<TournamentTeam> contenders;
     protected MatchProgram program;
     protected ArrayList<TournamentHistory> history;
 
@@ -19,14 +19,14 @@ public abstract class Tournament {
         program = new MatchProgram();
         history = new ArrayList<>();
     }
-    public Tournament(String name, Sport tournamentType, ArrayList<Team> contenders) {
+    public Tournament(String name, Sport tournamentType, ArrayList<TournamentTeam> contenders) {
         this.name = name;
         this.tournamentType = tournamentType;
         this.contenders = contenders;
         program = new MatchProgram();
         history = new ArrayList<>();
     }
-    public Tournament(String name, Sport tournamentType, ArrayList<Team> contenders,
+    public Tournament(String name, Sport tournamentType, ArrayList<TournamentTeam> contenders,
                       MatchProgram program, ArrayList<TournamentHistory> history) {
         this.name = name;
         this.tournamentType = tournamentType;
@@ -35,13 +35,17 @@ public abstract class Tournament {
         this.history = history;
     }
 
+
+    public ArrayList<TournamentTeam> getContenders() {
+        return contenders;
+    }
+
+    public MatchProgram getMatchProgram() {
+        return program;
+    }
     public abstract void createMatchProgram(String matchType);
-    public abstract MatchProgram getMatchProgram();
+
     public abstract String viewTeamRankings();
     public abstract void viewGroupRankings();
-    public abstract ArrayList<Team> getContenders();
 
-    public String getName() {
-        return name;
-    }
 }

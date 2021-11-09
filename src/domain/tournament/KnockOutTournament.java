@@ -9,7 +9,7 @@ public class KnockOutTournament extends Tournament{
     public KnockOutTournament(String name, Sport tournamentType) {
         super(name, tournamentType);
     }
-    public KnockOutTournament(String name, Sport tournamentType, ArrayList<Team> contenders) {
+    public KnockOutTournament(String name, Sport tournamentType, ArrayList<TournamentTeam> contenders) {
         super(name, tournamentType, contenders);
     }
 
@@ -19,15 +19,7 @@ public class KnockOutTournament extends Tournament{
         program.createMatchProgram();
     }
 
-    @Override
-    public MatchProgram getMatchProgram() {
-        return program;
-    }
 
-    @Override
-    public ArrayList<Team> getContenders() {
-        return contenders;
-    }
 
     @Override
     public String viewTeamRankings() {
