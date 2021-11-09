@@ -6,6 +6,7 @@ import domain.tournament.TournamentTeam;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MatchProgram {
     private ArrayList<ArrayList<Match>> knockoutBracket;
@@ -84,7 +85,8 @@ public class MatchProgram {
 
 
     public String createMatchProgram() {
-        List<Integer> toursize = (List<Integer>) Arrays.stream(tourSize).boxed();//toList();
+        //List<Integer> toursize = (List<Integer>) Arrays.stream(tourSize).boxed();//toList();
+        List<Integer> toursize = Arrays.stream(tourSize).boxed().collect(Collectors.toList());
         int nrOfTeams = teams.size();
         if (!toursize.contains(nrOfTeams)) {
             return "Not valid number of teams";
