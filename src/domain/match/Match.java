@@ -1,38 +1,40 @@
 package domain.match;
 
 import domain.team.*;
+import domain.tournament.TournamentTeam;
+
 import java.util.Date;
 
 public class Match {
     private MatchResult result;
-    private Team[] teams;
+    private TournamentTeam[] teams;
     private Date date;
-    private Team winner;
+    private TournamentTeam winner;
 
     public Match() {
-        teams = new Team[2];
+        teams = new TournamentTeam[2];
         date = new Date();
         result = new MatchResult();
     }
-    public Match(Team[] teams) {
+    public Match(TournamentTeam[] teams) {
         this.teams = teams;
         date = new Date();
         result = new MatchResult();
     }
-    public Match(Team[] teams, Date date) {
+    public Match(TournamentTeam[] teams, Date date) {
         this.teams = teams;
         this.date = date;
         result = new MatchResult();
     }
 
-    public Team getTeam(int i){     //i needs to be 0 or 1
+    public TournamentTeam getTeam(int i){     //i needs to be 0 or 1
         return teams[i];
     }
-    public void setTeams(Team a, Team b) {
+    public void setTeams(TournamentTeam a, TournamentTeam b) {
         teams[0] = a;
         teams[1] = b;
     }
-    public void exchangeTeamX(Team a, int x) {      //x has to be 0 or 1
+    public void exchangeTeamX(TournamentTeam a, int x) {      //x has to be 0 or 1
         teams[x] = a;
     }
     public String homeAndGuestTeam() {
@@ -56,10 +58,10 @@ public class Match {
         return result.calculateScore();
     }
 
-    public void setWinner(Team winner) {
+    public void setWinner(TournamentTeam winner) {
         this.winner = winner;
     }
-    public Team getWinner() {
+    public TournamentTeam getWinner() {
         return winner;
     }
 

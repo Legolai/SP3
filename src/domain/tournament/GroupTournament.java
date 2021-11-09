@@ -21,11 +21,6 @@ public class GroupTournament extends Tournament{
     }
 
     @Override
-    public MatchProgram getMatchProgram() {
-        return null;
-    }
-
-    @Override
     public String viewTeamRankings() {
         return null;
     }
@@ -35,10 +30,6 @@ public class GroupTournament extends Tournament{
 
     }
 
-    @Override
-    public ArrayList<Team> getContenders() {
-        return contenders;
-    }
 
     @Override
     public String toString() {

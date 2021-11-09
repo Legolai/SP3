@@ -1,6 +1,7 @@
 package domain.match;
 
 import domain.team.Team;
+import domain.tournament.TournamentTeam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +12,7 @@ public class MatchProgram {
     private ArrayList<Match> allMatches;        // is this needed?
     private ArrayList<Match> upcomingMatches;   // matches to be played, have to finish before next round
     private int currentRound;
-    private ArrayList<Team> teams;
+    private ArrayList<TournamentTeam> teams;
     //private ArrayList<Team> addedRemovedTeams;
     private int[] tourSize = {2,4,8,16,32,64};
     private String scoreOrTime = "";
@@ -22,7 +23,7 @@ public class MatchProgram {
         teams = new ArrayList<>();
         //addedRemovedTeams = new ArrayList<>();
     }
-    public MatchProgram(ArrayList<Team> teams) {
+    public MatchProgram(ArrayList<TournamentTeam> teams) {
         knockoutBracket = new ArrayList<>();
         allMatches = new ArrayList<>();
         this.teams = teams;
@@ -33,11 +34,11 @@ public class MatchProgram {
         scoreOrTime = a;
     }   //a should be 'score' or 'time'
 
-    public void addTeam(Team team) {
+    public void addTeam(TournamentTeam team) {
         teams.add(team);
     }
     public void removeTeam(String name) {
-        for (Team t : teams) {
+        for (TournamentTeam t : teams) {
             if (t.getName().equals(name)) {
                 teams.remove(t);
                 break;
@@ -45,28 +46,27 @@ public class MatchProgram {
         }
     }
     public void removeTeam(Team team) {
-        for (Team t : teams) {
+        for (TournamentTeam t : teams) {
             if (t.equals(team)) {
                 teams.remove(t);
                 break;
             }
         }
     }
-    public ArrayList<Team> getTeams() {
+    public ArrayList<TournamentTeam> getTeams() {
         return teams;
     }
 
-    public ArrayList<Match> getAllMatchesORUpcomingMatches(int ab) {
-        if (ab == 0) {
-            return allMatches;
-        } else {
-            return upcomingMatches;
-        }
-    }   // x = 0 is allmatches x = 1 is upcoming
+    public ArrayList<Match> getAllMatches() {
+        return allMatches;
+    }
+    public ArrayList<Match> getUpcomingMatches() {
+        return upcomingMatches;
+    }
 
 
     public String advanceKnockoutTournament() {
-        ArrayList<Team> wonTeams = new ArrayList<>();
+        ArrayList<TournamentTeam> wonTeams = new ArrayList<>();
         for(Match a : upcomingMatches) {
             if (a.getWinner() == null) {
                 return "Not all matches have finished!";
@@ -125,7 +125,7 @@ public class MatchProgram {
         changeMatchContenders(m2,m1.getTeam(t1),t2);    // reverse of above
     }
 
-    public void changeMatchContenders(Match m, Team t, int ab) {    // ab has to be 0 or 1
+    public void changeMatchContenders(Match m, TournamentTeam t, int ab) {    // ab has to be 0 or 1
         for (Match a : allMatches) {
             if (a.equals(m)) {
                 a.exchangeTeamX(t,ab);
@@ -135,8 +135,8 @@ public class MatchProgram {
         checkIfInTeams(t);
     }
 
-    private void checkIfInTeams(Team t) {      // adds team t if not found in the list teams
-        for(Team a : teams) {
+    private void checkIfInTeams(TournamentTeam t) {      // adds team t if not found in the list teams
+        for(TournamentTeam a : teams) {
             if (a.equals(t)) {      // team t already in teams, so just end method
                 return;
             }

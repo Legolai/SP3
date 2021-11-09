@@ -28,4 +28,8 @@ public class TournamentTeam {
         this.score = score + scoreAmount;
     }
 
+    public String getName() {
+        return team.getName();
+    }
+
 }
