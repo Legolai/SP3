@@ -33,9 +33,9 @@ public class Program {
 
     public void run() {
         isRunning = true;
-        navigation.setCurrentMenu("Home");
+        navigation.setCurrentMenu("Start");
         while (isRunning) {
-            navigation.goTo("Home");
+            navigation.goTo("Start");
         }
     }
 
@@ -46,7 +46,8 @@ public class Program {
     }
 
     private void setupNavigtion() {
-        navigation.addDestination(new MainMenu("Home", true));
+        navigation.addDestination(new StartMenu("Start", true));
+        navigation.addDestination(new AdminMenu("Admin", true));
         navigation.addDestination(new TournamentsMenu("Tournaments", true, tournaments));
         navigation.addDestination(new TournamentMenu("Tournament", false));
         navigation.addDestination(new NewTournamentMenu("New Tournament", true ,tournaments));

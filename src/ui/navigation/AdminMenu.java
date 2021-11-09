@@ -5,9 +5,9 @@ import domain.tournament.Tournament;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainMenu extends Menu {
+public class AdminMenu extends Menu {
 
-    public MainMenu(String name, boolean isHeaderShown) {
+    public AdminMenu(String name, boolean isHeaderShown) {
         super(name, isHeaderShown, new String[]{
                 "View tournaments",
                 "Create tournament",

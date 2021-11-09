@@ -1,5 +1,6 @@
 package ui.navigation;
 
+import domain.team.Team;
 import domain.tournament.Tournament;
 
 import java.util.HashMap;
@@ -39,14 +40,11 @@ public class TournamentsMenu extends Menu {
     }
 
     private void showAllTournaments(Navigator navigation) {
-        int columns = 0;
+        ui.newLine();
+        String s = "";
         for (String key : tournaments.keySet()) {
-            ui.print(tournaments.get(key).getName() + "," + (columns > 3 ? "\n" : " "));
-            if (columns > 3) {
-                columns = 0;
-                continue;
-            }
-            ++columns;
+            s += tournaments.get(key).getName() + ", ";
+            if(s.length() > 40){ ui.println(s); s="";}
         }
         ui.newLine();
         ui.waitForUser();

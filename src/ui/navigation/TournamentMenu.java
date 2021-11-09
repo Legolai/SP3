@@ -1,7 +1,10 @@
 package ui.navigation;
 
+import domain.match.Match;
 import domain.team.Team;
 import domain.tournament.Tournament;
+
+import java.util.ArrayList;
 
 public class TournamentMenu extends Menu {
     Tournament tournament;
@@ -42,14 +45,15 @@ public class TournamentMenu extends Menu {
         clearScreen();
         ui.println(tournament.getName());
         ui.newLine();
-        ui.println("Team Ranking" + " ".repeat(10) + "| Points | Score |");
-        ui.println("-".repeat(40));
-        for (Team team: tournament.getContenders()) {
-            String teamName = team.getName();
+        ui.println("Team Ranking" + " ".repeat(12) + "| Points | Score |");
+        ui.println("-".repeat(42));
+        ArrayList<Team> teams = tournament.getContenders();
+        for (int i = 0; i < teams.size(); ++i) {
+            String teamName = teams.get(i).getName();
             String name = (teamName.length() > 20 ? teamName.substring(0,17)+"..." : teamName);
             // TODO: handel score and point size and padding
-            ui.println("| " + name + " ".repeat(20 - name.length()) + "|"+ " ".repeat(3) + 0 + " ".repeat(4) +"|" + " ".repeat(3) + 0 + " ".repeat(3) + "|");
-            ui.println("-".repeat(40));
+            ui.println("(" + (i+1) + ") " + name + " ".repeat(20 - name.length()) + "|"+ " ".repeat(3) + 0 + " ".repeat(4) +"|" + " ".repeat(3) + 0 + " ".repeat(3) + "|");
+            ui.println("-".repeat(42));
         }
         ui.newLine();
         ui.waitForUser();
@@ -57,15 +61,11 @@ public class TournamentMenu extends Menu {
     }
 
     private void showContenders(Navigator navigation) {
-        int columns = 0;
         ui.newLine();
+        String s = "";
         for (Team team : tournament.getContenders()) {
-            ui.print(team.getName() + "," + (columns > 4 ? "\n" : " "));
-            if (columns > 4) {
-                columns = 0;
-                continue;
-            }
-            ++columns;
+            s += team.getName() + ", ";
+            if(s.length() > 40){ ui.println(s); s="";}
         }
         ui.newLine();
         ui.waitForUser();
@@ -73,7 +73,12 @@ public class TournamentMenu extends Menu {
     }
 
     private void showMatchProgram(Navigator navigation){
-        ui.println(tournament.getMatchProgram().toString());
+        tournament.createMatchProgram("score");
+        for (Match match : tournament.getMatchProgram().getAllMatchesORUpcomingMatches(0)) {
+            ui.println("| " + match.getTeam(0).getName().replace(" ", "").substring(0,3).toUpperCase() + " vs " + match.getTeam(1).getName().replace(" ", "").substring(0,3).toUpperCase() + " |");
+            ui.println("| " + match.getDate().toString() + " |");
+        }
+
         ui.waitForUser();
         show(navigation, tournament);
     }
