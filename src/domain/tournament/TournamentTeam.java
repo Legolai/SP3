@@ -2,7 +2,7 @@ package domain.tournament;
 
 import domain.team.Team;
 
-public class TournamentTeam {
+public class TournamentTeam{
     private final Team team;
     private int point;
     private int score;
@@ -32,4 +32,15 @@ public class TournamentTeam {
         return team.getName();
     }
 
+    public int compareTo(TournamentTeam otherTeam) {
+        if (this.point != otherTeam.getPoint()) {
+            return otherTeam.getPoint() - this.point;
+        }
+        else if (this.score != otherTeam.getScore()) {
+            return otherTeam.getScore() - this.score ;
+        }
+        else {
+            return otherTeam.getName().compareTo(this.team.getName());
+        }
+    }
 }

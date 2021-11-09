@@ -21,7 +21,7 @@ public class TournamentsMenu extends Menu {
     public void show(Navigator navigation) {
         clearScreen();
         super.showMenu("b");
-        switch (ui.getUserOption("Select menu: ", getNumberOfOptions(), "b")) {
+        switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "b")) {
             case "1" -> showAllTournaments(navigation);
             case "2" -> goToTournament(navigation);
             default -> navigation.goBack();
@@ -29,7 +29,7 @@ public class TournamentsMenu extends Menu {
     }
 
     private void goToTournament(Navigator navigation) {
-        String tournamentName = ui.getUserInput("Type the tournament's name: ").toLowerCase();
+        String tournamentName = ui.getUserInput("Type the tournament's name:").toLowerCase();
         if (tournaments.containsKey(tournamentName)) {
             ((TournamentMenu) navigation.goManuelTo("Tournament")).show(navigation, tournaments.get(tournamentName));
         } else {
@@ -41,10 +41,10 @@ public class TournamentsMenu extends Menu {
 
     private void showAllTournaments(Navigator navigation) {
         ui.newLine();
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (String key : tournaments.keySet()) {
-            s += tournaments.get(key).getName() + ", ";
-            if(s.length() > 40){ ui.println(s); s="";}
+            s.append(tournaments.get(key).getName()).append(", ");
+            if(s.length() > 40){ ui.println(s.toString()); s = new StringBuilder();}
         }
         ui.newLine();
         ui.waitForUser();

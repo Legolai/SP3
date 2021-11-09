@@ -50,6 +50,16 @@ public class Match {
 
     public void setResult(int homeScore, int guestScore) {
         result.setResult(homeScore, guestScore);
+        if (homeScore > guestScore) {
+            setWinner(teams[0]);
+        } else {
+            setWinner(teams[1]);
+        }
+        teams[0].getTeam().getHistory().addMatch(this);
+        teams[1].getTeam().getHistory().addMatch(this);
+        winner.addPoint(2);
+        teams[0].addScore(result.calculateScore()[0]);
+        teams[1].addScore(result.calculateScore()[1]);
     }
     public int[] getScore() {
         return result.getScore();
@@ -63,6 +73,10 @@ public class Match {
     }
     public TournamentTeam getWinner() {
         return winner;
+    }
+
+    public String shortToString() {
+        return teams[0].getName() + " vs " + teams[1].getName();
     }
 
     @Override

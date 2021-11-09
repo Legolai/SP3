@@ -48,7 +48,7 @@ public class MatchProgram {
     }
     public void removeTeam(Team team) {
         for (TournamentTeam t : teams) {
-            if (t.equals(team)) {
+            if (t.getTeam().equals(team)) {
                 teams.remove(t);
                 break;
             }
@@ -66,11 +66,18 @@ public class MatchProgram {
     }
 
 
-    public String advanceKnockoutTournament() {
+    public void advanceKnockoutTournament() {
         ArrayList<TournamentTeam> wonTeams = new ArrayList<>();
+        if(upcomingMatches.size() == 1){
+            if (upcomingMatches.get(0).getWinner() == null) {
+                return;
+            }
+            upcomingMatches = null;
+            return;
+        }
         for(Match a : upcomingMatches) {
             if (a.getWinner() == null) {
-                return "Not all matches have finished!";
+                return;
             }   // if a match doesnt have a winner, returns string "not all matches have finished"
             wonTeams.add(a.getWinner());
         }   // checks if the upcomingMatches have been finished, if not can't continue
@@ -80,7 +87,7 @@ public class MatchProgram {
             a.setTeams(wonTeams.get(counter),wonTeams.get(counter+1));
             counter += 2;
         }
-        return "Succesfully advanced the tournament to round: "+(currentRound+1);
+        upcomingMatches = knockoutBracket.get(currentRound);
     }
 
 

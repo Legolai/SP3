@@ -16,14 +16,14 @@ public abstract class Tournament {
         this.name = name;
         this.tournamentType = tournamentType;
         contenders = new ArrayList<>();
-        program = new MatchProgram();
+        program = new MatchProgram(contenders);
         history = new ArrayList<>();
     }
     public Tournament(String name, Sport tournamentType, ArrayList<TournamentTeam> contenders) {
         this.name = name;
         this.tournamentType = tournamentType;
         this.contenders = contenders;
-        program = new MatchProgram();
+        program = new MatchProgram(this.contenders);
         history = new ArrayList<>();
     }
     public Tournament(String name, Sport tournamentType, ArrayList<TournamentTeam> contenders,
@@ -47,5 +47,9 @@ public abstract class Tournament {
 
     public abstract String viewTeamRankings();
     public abstract void viewGroupRankings();
+
+    public String getName() {
+        return name;
+    }
 
 }
