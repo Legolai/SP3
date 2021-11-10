@@ -68,7 +68,8 @@ public class Program {
 
     private void saveData() {
         try {
-            io.saveTournamentsToFile("src/resources/tournaments.txt", tournaments);
+            io.saveTournamentsToDir("src/resources/tournaments", tournaments);
+            io.saveTeamsToFile("src/resources/teams.txt", teams);
         } catch (IOException e) {
             ui.println(e.getMessage());
         }

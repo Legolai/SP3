@@ -1,4 +1,4 @@
-De vilde hunde, Oscar, Nicolai
-De hurtige knægte, Michael, Oliver
-De farlige sørøver, Hans, Otto
-Guldgraverne, Mads, Peter
+Guldgraverne, Oscar, Nicolai, 
+De farlige sørøver, Oscar, Nicolai, 
+De vilde hunde, Oscar, Nicolai, 
+De hurtige knægte, Oscar, Nicolai, 

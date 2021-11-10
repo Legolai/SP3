@@ -142,6 +142,11 @@ package database
         - Scanner sc
         + void readFromFile(String path)
         + void writeToFile(String path)
+        + void saveTournamentToFile(String path, Tournament tournament)
+        + void saveTeamsToFile(String path, HashMap<String, Team> teams)
+        + HashMap<String, Team> loadTeams(String path)
+        + HashMap<String, Tournament> loadTournaments(String path)
+        + void saveTournamentsToDir(String path, HashMap<String, Tournament> tournaments)
     }
 }
 

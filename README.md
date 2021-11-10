@@ -1,1 +1,2 @@
-# SP3 - domain.tournament.Tournament Planning program
+# SP3 - Tournament Planning program
+![Class Diagram](docs/ClassDigramV2.png)

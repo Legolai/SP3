@@ -39,32 +39,25 @@ public class IO {
         writer.close();
     }
 
-    public void saveTournamentsToFile(String path, HashMap<String, Tournament> tournaments) throws IOException {
-        File file = new File(path);
-        if (file.createNewFile())
-            ui.println("The file has been created");
-        FileWriter writer = new FileWriter(path);
-        StringBuilder data = new StringBuilder();
+    public void saveTournamentsToDir(String path, HashMap<String, Tournament> tournaments) throws IOException {
         for (String key : tournaments.keySet()) {
-            Tournament tn = tournaments.get(key);
-            data.append(tn.getName()).append(",").append("Fodbold,").append("\n");
+            saveTournamentToFile(path, tournaments.get(key));
         }
-        writer.write(data.toString());
-        writer.close();
     }
 
     public HashMap<String, Tournament> loadTournaments(String path) throws FileNotFoundException {
         HashMap<String, Tournament> tournaments = new HashMap<>();
         File file = new File(path);
         Scanner sc = new Scanner(file);
+        ArrayList<Team> tms = new ArrayList<>(loadTeams("src/resources/teams.txt").values());
         ArrayList<TournamentTeam> teams = new ArrayList<>();
-        for(Team tm : loadTeams("src/resources/teams.txt").values()){
+        for (Team tm : tms) {
             teams.add(new TournamentTeam(tm));
         }
 
         Tournament tournament;
         Sport sport;
-        while (sc.hasNext()){
+        while (sc.hasNext()) {
             String[] lineData = sc.nextLine().split(",");
             sport = new Sport(lineData[1]);
             tournament = new KnockOutTournament(lineData[0], sport, teams);
@@ -81,13 +74,14 @@ public class IO {
         Scanner sc = new Scanner(file);
         ArrayList<Player> players = new ArrayList<>();
         Team team;
-        while (sc.hasNext()){
+        while (sc.hasNext()) {
             String[] lineData = sc.nextLine().split(",");
             for (int i = 1; i < lineData.length; i++) {
-                players.add(new Player(lineData[i]));
+                players.add(new Player(lineData[i].replace(" ", "")));
             }
-            team = new Team(lineData[0],players);
-            teams.put(team.getName().toLowerCase(),team);
+            team = new Team(lineData[0], players);
+            teams.put(team.getName().toLowerCase(), team);
+            players = new ArrayList<>();
         }
         return teams;
     }
@@ -100,29 +94,37 @@ public class IO {
         StringBuilder data = new StringBuilder();
         for (String key : teams.keySet()) {
             Team t = teams.get(key);
-            data.append(t.getName());
+            data.append(t.getName()).append(", ");
+            for (Player pl : t.getTeamMembers()) {
+                data.append(pl.getName()).append(", ");
+            }
+            data.append("\n");
         }
         writer.write(data.toString());
         writer.close();
     }
 
     public void saveTournamentToFile(String path, Tournament tournament) throws IOException {
-        File file = new File(path);
+        String filePath = path + "/tournament_" + tournament.getName().replace(" ", "_")+".txt";
+        File file = new File(filePath);
         if (file.createNewFile())
             ui.println("The file has been created");
-        FileWriter writer = new FileWriter(path);
+        FileWriter writer = new FileWriter(filePath);
         StringBuilder data = new StringBuilder();
         data.append(tournament.getSport().getSPORTNAME()).append(", ");
         data.append(tournament.getName()).append("\n");
         data.append("List of all the matches:").append("\n");
-        String[] fraction = {"   Final", "   Semifinals", "   Quarterfinals","   8th-finals","   16th-finals","   32-finals"};
+        String[] fraction = {"Final", "Semifinals", "Quarterfinals", "8th-finals", "16th-finals", "32-finals"};
         int counter = 1;
         ArrayList<ArrayList<Match>> KnockoutBracket = tournament.getMatchProgram().getKnockoutBracket();
+        data.append(KnockoutBracket.size()+"");
         for (int i = 0; i < KnockoutBracket.size(); i++) {
-            data.append(fraction[KnockoutBracket.size()-1-i]);
-            for(int j = 0; j < KnockoutBracket.get(i).size(); i++) {
-                data.append("Match ").append(counter).append(". ").append(
-                        KnockoutBracket.get(i).get(j).shortToString()).append("\n");
+            data.append(fraction[KnockoutBracket.size() - 1 - i]).append("\n");
+            for (int j = 0; j < KnockoutBracket.get(i).size(); j++) {
+                Match match = KnockoutBracket.get(i).get(j);
+                data.append("Match ").append(counter).append(". ").append(match
+                        .shortToString()).append("\n");
+                counter++;
             }
         }
         //for (Match m : tournament.getMatchProgram().getAllMatches()) {
