@@ -37,7 +37,7 @@ public class NewTeamMenu extends Menu {
         while (willAddPlayer) {
             clearScreen();
             boolean isDone = members.size() >= 2;
-            String headerMsg = teamName + "\n";
+            String headerMsg = "---| " + teamName + " |---\n";
             if (!isDone) {
                 headerMsg += "Aleast " + (2 - members.size()) + " more members is need to create this team";
             }

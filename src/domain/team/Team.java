@@ -39,6 +39,10 @@ public class Team {
         teamMembers.add(a);
     }
 
+    public void removeMember(Player a) {
+        teamMembers.remove(a);
+    }
+
     public TeamHistory getHistory() {
         return history;
     }
