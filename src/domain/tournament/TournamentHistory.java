@@ -1,8 +1,8 @@
 package domain.tournament;
 
 import domain.match.Match;
+
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 public class TournamentHistory {
     //LinkedHashMap<String,Integer> a;      this for teamHistory

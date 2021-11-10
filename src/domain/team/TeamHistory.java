@@ -16,6 +16,9 @@ public class TeamHistory {
         tournamentHistoryResults = new LinkedHashMap<>();
         matches = new ArrayList<>();
         this.team = team;
+        teamStreak.put("Wins", 0);
+        teamStreak.put("Draws", 0);
+        teamStreak.put("Losses", 0);
     }
 
     public LinkedHashMap<String, Integer> getTeamStreak() {
@@ -33,7 +36,7 @@ public class TeamHistory {
 
     private void updateTeamStreak(Match match) {
         String s;
-        if (team.equals(match.getWinner())) {
+        if (team.equals(match.getWinner().getTeam())) {
             s = "Wins";
         } else if (match.getWinner() == null) {
             s = "Draws";

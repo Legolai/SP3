@@ -9,7 +9,7 @@ public class GroupTournament extends Tournament{
     private final KnockOutTournament finals;
 
 
-    public GroupTournament(String name, Sport tournamentType, ArrayList<Team> contenders) {
+    public GroupTournament(String name, Sport tournamentType, ArrayList<TournamentTeam> contenders) {
         super(name, tournamentType, contenders);
         groups = new ArrayList<>();
         finals = new KnockOutTournament(name,tournamentType);   //new method to add contenders later on

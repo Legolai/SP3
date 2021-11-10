@@ -40,6 +40,20 @@ public class UI {
         return sc.nextLine();
     }
 
+    public String getUserInputNumber(String msg) {
+        sc = new Scanner(System.in);
+        print(msg + " ");
+        String s = sc.next();
+        for (char ch: s.toCharArray()) {
+            if(!Character.isDigit(ch)){
+                println("Invalid input!");
+                s = getUserInputNumber(msg);
+                break;
+            }
+        }
+        return s;
+    }
+
     public void waitForUser() {
         sc = new Scanner(System.in);
         println("Press enter to continue. ");

@@ -1,7 +1,7 @@
 package domain.tournament;
 
-import domain.team.Team;
 import domain.match.MatchProgram;
+
 import java.util.ArrayList;
 
 public abstract class Tournament {
@@ -16,16 +16,18 @@ public abstract class Tournament {
         this.name = name;
         this.tournamentType = tournamentType;
         contenders = new ArrayList<>();
-        program = new MatchProgram();
+        program = new MatchProgram(contenders);
         history = new ArrayList<>();
     }
+
     public Tournament(String name, Sport tournamentType, ArrayList<TournamentTeam> contenders) {
         this.name = name;
         this.tournamentType = tournamentType;
         this.contenders = contenders;
-        program = new MatchProgram();
+        program = new MatchProgram(this.contenders);
         history = new ArrayList<>();
     }
+
     public Tournament(String name, Sport tournamentType, ArrayList<TournamentTeam> contenders,
                       MatchProgram program, ArrayList<TournamentHistory> history) {
         this.name = name;
@@ -43,9 +45,15 @@ public abstract class Tournament {
     public MatchProgram getMatchProgram() {
         return program;
     }
+
     public abstract void createMatchProgram(String matchType);
 
     public abstract String viewTeamRankings();
+
     public abstract void viewGroupRankings();
+
+    public String getName() {
+        return name;
+    }
 
 }

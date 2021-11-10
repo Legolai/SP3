@@ -5,6 +5,7 @@ import domain.team.Team;
 import domain.tournament.KnockOutTournament;
 import domain.tournament.Sport;
 import domain.tournament.Tournament;
+import domain.tournament.TournamentTeam;
 import ui.UI;
 
 import java.io.File;
@@ -55,13 +56,18 @@ public class IO {
         HashMap<String, Tournament> tournaments = new HashMap<>();
         File file = new File(path);
         Scanner sc = new Scanner(file);
-        ArrayList<Team> teams = new ArrayList<>( loadTeams("src/resources/teams.txt").values());
+        ArrayList<TournamentTeam> teams = new ArrayList<>();
+        for(Team tm : loadTeams("src/resources/teams.txt").values()){
+            teams.add(new TournamentTeam(tm));
+        }
+
         Tournament tournament;
         Sport sport;
         while (sc.hasNext()){
             String[] lineData = sc.nextLine().split(",");
             sport = new Sport(lineData[1]);
             tournament = new KnockOutTournament(lineData[0], sport, teams);
+            tournament.createMatchProgram("score");
             tournaments.put(tournament.getName().toLowerCase(), tournament);
         }
         return tournaments;
