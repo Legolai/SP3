@@ -77,7 +77,12 @@ public class Match {
     }
 
     public String shortToString() {
-        return teams[0].getName() + " vs " + teams[1].getName();
+        String homeTeam = (teams[0].getName().equals(null) ? "yet to be determined" : teams[0].getName());
+        String guestTeam = (teams[1].getName().equals(null) ? "yet to be determined" : teams[1].getName());
+        int hscore = teams[0].getScore();
+        int gscore = teams[1].getScore();
+        return date.toString() + " " + homeTeam + "[" + hscore + "]" +
+                " vs " + "[" + gscore + "]" + guestTeam;
     }
 
     @Override
