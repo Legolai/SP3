@@ -50,8 +50,6 @@ public abstract class Tournament {
 
     public abstract String viewTeamRankings();
 
-    public abstract void viewGroupRankings();
-
     public String getName() {
         return name;
     }

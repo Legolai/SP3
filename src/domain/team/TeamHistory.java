@@ -1,6 +1,6 @@
 package domain.team;
 
-import domain.match.*;
+import domain.match.Match;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 
 public class TeamMenu extends Menu {
 
-    Team team;
+    private Team team;
 
     public TeamMenu(String name, boolean isHeaderShown) {
         super(name, isHeaderShown, new String[]{

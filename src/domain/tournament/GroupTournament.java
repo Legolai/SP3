@@ -26,12 +26,6 @@ public class GroupTournament extends Tournament{
     }
 
     @Override
-    public void viewGroupRankings() {
-
-    }
-
-
-    @Override
     public String toString() {
         return null;
     }

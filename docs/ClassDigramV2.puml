@@ -4,27 +4,35 @@ package entries{
         + {static} void main(String[] args)
     }
 }
+
 package ui{
     class Program {
-       - boolean isRunning
-       - ArrayList<Tournament> tournaments
-       - HashMap<String, Team>  teams
-       - UI ui
-       - IO io
-       - HashMap<String, Menu> navigation
+        - boolean isRunning
+        - HashMap<String, Tournament>  tournaments
+        - HashMap<String, Team>  teams
+        - UI ui
+        - IO io
+        - Navigator navigation
+
         + void start()
         + void run()
         + void quit()
+        - void setupNavigation()
+        - void loadData()
+        - void saveData()
     }
 
     class UI{
         - Scanner sc
-        + String getUserOption(String msg, int numOfValidOptions, String lastOptionKey)
+
         + String getUserOption(String msg, String[] vaildOptions)
+        + String getUserOption(String msg, int numOfValidOptions, String lastOptionKey)
         + String getUserInput(String msg)
+        + String getUserInputNumber(String msg)
+        + void waitForUser()
         + void printOptions(String[] msgOptions, String lastOptionKey)
-        + void newLine()
         + void println(String msg)
+        + void newLine()
         + void print(String msg)
         + void clear()
     }
@@ -36,64 +44,96 @@ package ui{
             - boolean isHeaderShown
 
             + void clearScreen()
-            - void updatenavigation(HashMap<String, Menu> navigation)
             - void showHeader()
             # void showCustomHeader(String customHeader)
             - void showOptions(String lastOptionKey)
-            + {abstract} void show(HashMap<String, Menu> navigation)
-            # void show(HashMap<String, Menu> navigation, String lastOptionKey)
+            + {abstract} void show(Navigator navigation)
+            # void showMenu(String lastOptionKey)
             # int getNumberOfOptions()
+            + String getName()
+        }
+
+        class Navigator {
+            - HashMap<String, Menu> navigation
+            - ArrayList<String> previousMenus
+
+            + void goTo(String destination)
+            + Menu goManuelTo(String destination)
+            + void goBack()
+            + void addDestination(Menu menu)
+            - void updateCurrentMenu(String name)
+            + void setCurrentMenu(String name)
+        }
+
+        class StartMenu {
+            + void show(Navigator navigation)
+            - void logInAdmin(Navigator navigation)
         }
 
         class QuitMenu {
             - Program app
 
-            + void show(HashMap<String, Menu> navigation)
+            + void show(Navigator navigation)
         }
 
-        class MainMenu {
-            + void show(HashMap<String, Menu> navigation)
+        class AdminMenu {
+            + void show(Navigator navigation)
         }
 
         class TournamentsMenu {
-            - ArrayList<Tournament> tournaments
+            - HashMap<String, Tournament> tournaments
 
-            + void show(HashMap<String, Menu> navigation)
-            - void showAllTournaments(HashMap<String, Menu> navigation)
+            + void show(Navigator navigation)
+            - void goToTournament(Navigator navigation)
+            - void showAllTournaments(Navigator navigation)
+        }
 
+        class TournamentMenu {
+            - Tournament tournament
+
+            + void show(Navigator navigation)
+            + void show(Navigator navigation, Tournament tournament)
+            - void showConfigMatchFinished(Navigator navigation)
+            - void showRanking(Navigator navigation)
+            - void showContenders(Navigator navigation)
+            - void showMatchProgram(Navigator navigation)
         }
 
         class NewTournamentMenu {
-            - ArrayList<Tournament> tournaments
+            - HashMap<String, Tournament> tournaments
 
-            + void show(HashMap<String, Menu> navigation)
+            + void show(Navigator navigation)
+            - void showNewKnockOutTournament(Navigator navigation)
             - KnockOutTournament createNewKnockOutTournament()
         }
 
-        class NewTeamMenu {
+         class TeamsMenu {
             - HashMap<String, Team> teams
 
-            + void show(HashMap<String, Menu> navigation)
-            - void createNewTeam(HashMap<String, Menu> navigation)
-            - Playerlayer createPlayer()
-        }
-
-        class TeamsMenu {
-            - HashMap<String, Team> teams
-
-            + void show(HashMap<String, Menu> navigation)
-            - void goToTeam(HashMap<String, Menu> navigation)
-            - void showAllTeams(HashMap<String, Menu> navigation)
+            + void show(Navigator navigation)
+            - void goToTeam(Navigator navigation)
+            - void showAllTeams(Navigator navigation)
         }
 
         class TeamMenu {
             - Team team
 
-            + void show(HashMap<String, Menu> navigation)
-            + void show(HashMap<String, Menu> navigation, Team team)
+            + void show(Navigator navigation)
+            + void show(Navigator navigation, Team team)
+            - void showTeamMembers(Navigator navigation)
+            - void showTeamStreak(Navigator navigation)
+            - void showEditTeamMembers(Navigator navigation)
+            - void showAddNewMember(Navigator navigation)
+            - void showRemoveMember(Navigator navigation)
         }
 
+        class NewTeamMenu {
+            - HashMap<String, Team> teams
 
+            + void show(Navigator navigation)
+            - void createNewTeam(Navigator navigation)
+            - Playerlayer createPlayer()
+        }
     }
 }
 package database
@@ -110,35 +150,34 @@ package domain{
         abstract class Tournament {
              # String name
              # Sport tournamentType
-             # ArrayList<Team> contenders
+             # ArrayList<TournamentTeam> contenders
              # MatchProgram program
              # ArrayList<TournametHistory> history
 
+             + ArrayList<TournamentTeam> getContenders()
+             + MatchProgram getMatchProgram()
              + {abstract} void createMatchProgram(String matchType)
-             + {abstract} MatchProgram getMatchProgram()
-             + {abstract} String toString()
-             + {abstract} void viewTeamsRanking()
-             + {abstract} void viewTeams()
+             + {abstract} String viewTeamsRanking()
+             + String getName()
         }
 
         class Sport {
             + String SPORTNAME
             - ArrayList<String> rules
 
+            + void addRule(string a)
+            + String getSPORTNAME()
             + ArrayList<String> getRules()
-            + void addRule()
         }
 
         class GroupTournament
         {
             - ArrayList<Group> groups
             - KnockOutTournament finals
+
             + void createMatchProgram(String matchType)
-            + MatchProgram getMatchProgram()
+            + String viewTeamsRanking()
             + String toString()
-            + void viewTeamsRanking()
-            + void viewGroupsRanking()
-            + void viewTeams()
         }
 
         class TournamentTeam {
@@ -146,30 +185,32 @@ package domain{
             - int point
             - int score
 
-            + void addPoint()
-            + void addScore()
+            + Team getTeam()
+            + int getPoint()
+            + int getScore()
+            + void addPoint(int pointAmount)
+            + void addScore(int scoreAmount)
+            + String getName()
+            + int compareTo(TournamentTeam otherTeam)
         }
 
         class Group {
-            ArrayList<TournamentTeam> members
-
             + ArrayList<TournamentTeam> getMembers()
+            + void setMembers(ArrayList<TournamentTeam> a)
+            + void addMember(TournamentTeam a)
             + void sortRanking()
         }
 
         class KnockOutTournament
         {
-
             + void createMatchProgram(String matchType))
-            + MatchProgram getMatchProgram()
-            + String toString()
-            + void viewTeamsRanking()
-            + void viewTeams()
+            + String viewTeamsRanking()
         }
 
         class TournametHistory{
-            - LinkedMap<String, int>
-            - ArrayList<Match> matchs
+            - ArrayList<Match> matches
+            + ArrayList<Match> getMatches()
+            + void addMatch(Match a)
         }
     }
     package team{
@@ -183,21 +224,29 @@ package domain{
             + ArrayList<Player> getTeamMembers()
             + void setTeamMembers(ArrayList<Player> teamMembers)
             + void addMember(Player a)
+            + void removeMember(Player a)
             + TeamHistory getHistory()
             + void setHistory(TeamHistory history)
-
-            + ArrayList<Player> getMembers()
+            + String toString()
         }
 
         class TeamHistory {
-            - LinkedMap<String, int> teamStreak
-            - LinkedMap<String, int> tournametHistoryResults
+            - LinkedHashMap<String, Integer> teamStreak
+            - LinkedHashMap<String, Integer> tournametHistoryResults
             - ArrayList<Match> matches
             - Team team
 
-            + void addMatch()
-            + void addtournametHistoryResult()
-            - void updateTeamStreak()
+            + LinkedHashMap<String, Integer> getTeamStreak()
+            + void addMatch(Match match)
+            + void addTournametHistoryResult(String tournament, int ranking)
+            - void updateTeamStreak(Match match)
+            + void setTeamStreak(LinkedHashMap<String, Integer> teamStreak)
+            + LinkedHashMap<String, Integer> getTournametHistoryResults()
+            + void setTournametHistoryResults(LinkedHashMap<String, Integer> tournametHistoryResults)
+            + ArrayList<Match> getMatches()
+            + void setMatches(ArrayList<Match> matches)
+            + Team getTeam()
+            + void setTeam(Team team)
             + String toString()
         }
 
@@ -215,7 +264,7 @@ package domain{
             - ArrayList<Match> allMatches
             - ArrayList<Match> upcomingMatches
             - int currentRound
-            - ArrayList<Team> teams
+            - ArrayList<TournamentTeam> teams
             - int[] tourSize
             - String scoreOrTIme
 
@@ -223,34 +272,36 @@ package domain{
             + void addTeam(Team team)
             + void removeTeam(String name)
             + void removeTeam(Team team)
-            + ArrayList<Team> getTeams()
-            + ArrayList<Match> getAllMatchesORUpcomingMatches(int ab)
-            + String advanceKnockoutTournament()
-            + void createMatchProgram()
+            + ArrayList<TournamentTeam> getTeams()
+            + ArrayList<Match> getAllMatches()
+            + ArrayList<Match> getUpcomingMatches()
+            + void advanceKnockoutTournament()
+            + String createMatchProgram()
             - Match createEmptyMatch()
             + void switchTeams(Match m1, int t1, Match m2, int t2)
-            + void changeMatchContenders(Match m, team t, int ab)
-            - void checkIfInTeams(Team t)
-            + Match getMatchByID()
+            + void changeMatchContenders(Match m, TournamentTeam t, int ab)
+            - void checkIfInTeams(TournamentTeam t)
             + String toString()
         }
 
-        abstract class Match {
+        class Match {
             - MatchResult result
-            - Team[] teams
+            - TournamentTeam[] teams
             - Date date
-            - Team winner
+            - TournamentTeam winner
 
-            + setTeams(Team a, Team b)
-            + exchangeTeamX(Team a, int x)
+            + TournamentTeam getTeam(int i)
+            + setTeams(TournamentTeam homeTeam, TournamentTeam guestTeam)
+            + exchangeTeamX(TournamentTeam replacingTeam, int x)
             + String homeAndGuestTeam()
             + setDate(Date date)
             + Date getDate()
             + void setResult(int HomeScore, int GuestScore)
             + int[] getScore()
-            + getCalculatedScore
+            + int[] getCalculatedScore()
             + void setWinner()
             + Team getWinner()
+            + String shortToString()
             + String toString()
         }
 
@@ -259,8 +310,6 @@ package domain{
 
             + void setMinutes()
             + int getMinutes()
-            + int[] getScore()
-            + void setResult(int HomeScore, int GuestScore)
         }
 
         class MatchResult {
@@ -273,22 +322,23 @@ package domain{
         }
     }
 }
+
 Team o-- Player
-Team o-- TeamHistory
+Team o--o TeamHistory
 
 Match o-- MatchResult
-Match o-- Team
-Match <|-- MatchByScore
+Match o-- TournamentTeam
 Match <|-- MatchByTime
 
 Tournament o-- Sport
 Tournament o-- TournametHistory
 Tournament o-- MatchProgram
-Tournament o-- Team
+Tournament o-- TournamentTeam
 Tournament <|-- KnockOutTournament
 Tournament <|-- GroupTournament
 
 MatchProgram o-- Match
+MatchProgram o-- TournamentTeam
 
 Group o-- TournamentTeam
 GroupTournament o-- Group
@@ -298,19 +348,25 @@ TournamentTeam o-- Team
 TournametHistory o-- Match
 TeamHistory o-- Match
 
-Menu <|-- MainMenu
+Menu <|-- AdminMenu
 Menu <|-- TournamentsMenu
+Menu <|-- TournamentMenu
 Menu <|-- NewTournamentMenu
 Menu <|-- QuitMenu
-Menu <|-- NewTeamMenu
-Menu <|-- TeamMenu
 Menu <|-- TeamsMenu
+Menu <|-- TeamMenu
+Menu <|-- NewTeamMenu
+Menu <|-- StartMenu
+Menu o-- UI
+
+Navigator o-- Menu
 
 TeamsMenu o-- Team
 TeamMenu o-- Team
 NewTeamMenu o-- Team
 
 TournamentsMenu o-- Tournament
+TournamentMenu o-- Tournament
 NewTournamentMenu o-- Tournament
 
 Program --o QuitMenu
@@ -319,8 +375,7 @@ Program o-- UI
 Program o-- Tournament
 Program o-- Team
 Program o-- IO
-
-Menu o-- UI
+Program o-- Navigator
 
 Main o-- Program
 @enduml

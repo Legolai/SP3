@@ -8,8 +8,6 @@ import java.util.HashMap;
 
 public class MatchByTime extends Match {
     private int minutes;
-    HashMap<String, Integer> teamScores = new HashMap<>();
-
 
     public MatchByTime() {
         super();

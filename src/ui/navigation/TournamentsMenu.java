@@ -6,7 +6,7 @@ import domain.tournament.Tournament;
 import java.util.HashMap;
 
 public class TournamentsMenu extends Menu {
-    HashMap<String, Tournament> tournaments;
+     private HashMap<String, Tournament> tournaments;
 
     public TournamentsMenu(String name, boolean isHeaderShown, HashMap<String, Tournament> tournaments) {
         super(name, isHeaderShown, new String[]{

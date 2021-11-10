@@ -7,7 +7,7 @@ import domain.tournament.TournamentTeam;
 import java.util.ArrayList;
 
 public class TournamentMenu extends Menu {
-    Tournament tournament;
+    private Tournament tournament;
 
     public TournamentMenu(String name, boolean isHeaderShown) {
         super(name, isHeaderShown, new String[]{

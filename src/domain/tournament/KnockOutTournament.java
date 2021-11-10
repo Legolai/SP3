@@ -26,7 +26,4 @@ public class KnockOutTournament extends Tournament{
         return null;
     }
 
-    @Override
-    public void viewGroupRankings(){}   //not relevant so empty
-
 }
