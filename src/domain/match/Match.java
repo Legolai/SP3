@@ -30,20 +30,21 @@ public class Match {
     public TournamentTeam getTeam(int i){     //i needs to be 0 or 1
         return teams[i];
     }
-    public void setTeams(TournamentTeam a, TournamentTeam b) {
-        teams[0] = a;
-        teams[1] = b;
+    public void setTeams(TournamentTeam homeTeam, TournamentTeam guestTeam) {
+        teams[0] = homeTeam;
+        teams[1] = guestTeam;
     }
-    public void exchangeTeamX(TournamentTeam a, int x) {      //x has to be 0 or 1
-        teams[x] = a;
+    public void exchangeTeamX(TournamentTeam replacingTeam, int x) {      //x has to be 0 or 1
+        teams[x] = replacingTeam;
     }
     public String homeAndGuestTeam() {
-        return "Team 0 is: "+teams[0].getName()+" and team 1 is: "+teams[1].getName();
+        return "Home team is: "+teams[0].getName()+" and guest team is: "+teams[1].getName();
     }
 
     public void setDate(Date date) {
         this.date = date;
     }
+
     public Date getDate() {
         return date;
     }

@@ -8,6 +8,7 @@ public class Group {
     public Group() {
         members = new ArrayList<>();
     }
+
     public Group(ArrayList<TournamentTeam> members) {
         this.members = members;
     }
@@ -20,6 +21,7 @@ public class Group {
     public void setMembers(ArrayList<TournamentTeam> a) {
         members = a;
     }
+
     public void addMember(TournamentTeam a) {
         members.add(a);
     }

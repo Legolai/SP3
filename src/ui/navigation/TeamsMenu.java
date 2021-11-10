@@ -30,7 +30,7 @@ public class TeamsMenu extends Menu {
     }
 
     private void goToTeam(Navigator navigation) {
-        String teamName = ui.getUserInput("Type the team's name: ").toLowerCase();
+        String teamName = ui.getUserInput("Type the team's name:").toLowerCase();
         if (teams.containsKey(teamName)) {
             ((TeamMenu) navigation.goManuelTo("Team")).show(navigation, teams.get(teamName));
         } else {

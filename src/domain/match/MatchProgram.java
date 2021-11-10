@@ -15,7 +15,7 @@ public class MatchProgram {
     private int currentRound;
     private ArrayList<TournamentTeam> teams;
     //private ArrayList<Team> addedRemovedTeams;
-    private int[] tourSize = {2,4,8,16,32,64};
+    private int[] tourSize = {2, 4, 8, 16, 32, 64};
     private String scoreOrTime = "";
 
     public MatchProgram() {
@@ -24,6 +24,7 @@ public class MatchProgram {
         teams = new ArrayList<>();
         //addedRemovedTeams = new ArrayList<>();
     }
+
     public MatchProgram(ArrayList<TournamentTeam> teams) {
         knockoutBracket = new ArrayList<>();
         allMatches = new ArrayList<>();
@@ -38,6 +39,7 @@ public class MatchProgram {
     public void addTeam(TournamentTeam team) {
         teams.add(team);
     }
+
     public void removeTeam(String name) {
         for (TournamentTeam t : teams) {
             if (t.getName().equals(name)) {
@@ -46,6 +48,7 @@ public class MatchProgram {
             }
         }
     }
+
     public void removeTeam(Team team) {
         for (TournamentTeam t : teams) {
             if (t.getTeam().equals(team)) {
@@ -54,6 +57,7 @@ public class MatchProgram {
             }
         }
     }
+
     public ArrayList<TournamentTeam> getTeams() {
         return teams;
     }
@@ -61,6 +65,7 @@ public class MatchProgram {
     public ArrayList<Match> getAllMatches() {
         return allMatches;
     }
+
     public ArrayList<Match> getUpcomingMatches() {
         return upcomingMatches;
     }
@@ -68,14 +73,14 @@ public class MatchProgram {
 
     public void advanceKnockoutTournament() {
         ArrayList<TournamentTeam> wonTeams = new ArrayList<>();
-        if(upcomingMatches.size() == 1){
+        if (upcomingMatches.size() == 1) {
             if (upcomingMatches.get(0).getWinner() == null) {
                 return;
             }
             upcomingMatches = null;
             return;
         }
-        for(Match a : upcomingMatches) {
+        for (Match a : upcomingMatches) {
             if (a.getWinner() == null) {
                 return;
             }   // if a match doesnt have a winner, returns string "not all matches have finished"
@@ -83,8 +88,8 @@ public class MatchProgram {
         }   // checks if the upcomingMatches have been finished, if not can't continue
         currentRound += 1;
         int counter = 0;
-        for(Match a : knockoutBracket.get(currentRound)) {
-            a.setTeams(wonTeams.get(counter),wonTeams.get(counter+1));
+        for (Match a : knockoutBracket.get(currentRound)) {
+            a.setTeams(wonTeams.get(counter), wonTeams.get(counter + 1));
             counter += 2;
         }
         upcomingMatches = knockoutBracket.get(currentRound);
@@ -98,6 +103,7 @@ public class MatchProgram {
         if (!toursize.contains(nrOfTeams)) {
             return "Not valid number of teams";
         }
+
         for (int i = 0; i < toursize.indexOf(nrOfTeams) + 1; i++) {
             ArrayList<Match> a = new ArrayList<>();
             for (int j = 0; j < nrOfTeams / (2 + i * 2); j++) {
@@ -111,12 +117,12 @@ public class MatchProgram {
         currentRound = 0;
         int counter = 0;
 
+        //TODO: random team gen
         for (Match m : upcomingMatches) {   // sets the first round of matches
-            m.setTeams(teams.get(counter),teams.get(counter+1));
+            m.setTeams(teams.get(counter), teams.get(counter + 1));
             counter += 2;
         }
-        return "Matchprogram has been completed, and the first "+knockoutBracket.get(0).size()+
-
+        return "Matchprogram has been completed, and the first " + knockoutBracket.get(0).size() +
                 " matches have been scheduled (time yet to be set).";
     }
 
@@ -130,14 +136,14 @@ public class MatchProgram {
     //private void createMatch(Team HomeTeam, Team GuestTeam) {}
 
     public void switchTeams(Match m1, int t1, Match m2, int t2) {   // t1 and t2 needs to be 0 or 1
-        changeMatchContenders(m1,m2.getTeam(t2),t1);    // match 1 gets new team from match 2 that is t2, replacing t1 in match 1
-        changeMatchContenders(m2,m1.getTeam(t1),t2);    // reverse of above
+        changeMatchContenders(m1, m2.getTeam(t2), t1);    // match 1 gets new team from match 2 that is t2, replacing t1 in match 1
+        changeMatchContenders(m2, m1.getTeam(t1), t2);    // reverse of above
     }
 
     public void changeMatchContenders(Match m, TournamentTeam t, int ab) {    // ab has to be 0 or 1
         for (Match a : allMatches) {
             if (a.equals(m)) {
-                a.exchangeTeamX(t,ab);
+                a.exchangeTeamX(t, ab);
                 break;
             }
         }
@@ -145,18 +151,13 @@ public class MatchProgram {
     }
 
     private void checkIfInTeams(TournamentTeam t) {      // adds team t if not found in the list teams
-        for(TournamentTeam a : teams) {
+        for (TournamentTeam a : teams) {
             if (a.equals(t)) {      // team t already in teams, so just end method
                 return;
             }
         }
         teams.add(t);
     }
-
-    public Match getMatchByID() {
-        return null;
-    }   // is this useful?
-
 
     @Override
     public String toString() {
