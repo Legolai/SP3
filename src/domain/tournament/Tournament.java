@@ -37,6 +37,9 @@ public abstract class Tournament {
         this.history = history;
     }
 
+    public Sport getSport() {
+        return tournamentType;
+    }
 
     public ArrayList<TournamentTeam> getContenders() {
         return contenders;

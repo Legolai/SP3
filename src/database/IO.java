@@ -1,5 +1,6 @@
 package database;
 
+import domain.match.Match;
 import domain.team.Player;
 import domain.team.Team;
 import domain.tournament.KnockOutTournament;
@@ -90,4 +91,47 @@ public class IO {
         }
         return teams;
     }
+
+    public void saveTeamsToFile(String path, HashMap<String, Team> teams) throws IOException {
+        File file = new File(path);
+        if (file.createNewFile())
+            ui.println("The file has been created");
+        FileWriter writer = new FileWriter(path);
+        StringBuilder data = new StringBuilder();
+        for (String key : teams.keySet()) {
+            Team t = teams.get(key);
+            data.append(t.getName());
+        }
+        writer.write(data.toString());
+        writer.close();
+    }
+
+    public void saveTournamentToFile(String path, Tournament tournament) throws IOException {
+        File file = new File(path);
+        if (file.createNewFile())
+            ui.println("The file has been created");
+        FileWriter writer = new FileWriter(path);
+        StringBuilder data = new StringBuilder();
+        data.append(tournament.getSport().getSPORTNAME()).append(", ");
+        data.append(tournament.getName()).append("\n");
+        data.append("List of all the matches:").append("\n");
+        String[] fraction = {"   Final", "   Semifinals", "   Quarterfinals","   8th-finals","   16th-finals","   32-finals"};
+        int counter = 1;
+        ArrayList<ArrayList<Match>> KnockoutBracket = tournament.getMatchProgram().getKnockoutBracket();
+        for (int i = 0; i < KnockoutBracket.size(); i++) {
+            data.append(fraction[KnockoutBracket.size()-1-i]);
+            for(int j = 0; j < KnockoutBracket.get(i).size(); i++) {
+                data.append("Match ").append(counter).append(". ").append(
+                        KnockoutBracket.get(i).get(j).shortToString()).append("\n");
+            }
+        }
+        //for (Match m : tournament.getMatchProgram().getAllMatches()) {
+        //    data.append("Match ").append(counter).append(". ").append(m.shortToString()).append("\n");
+        //}
+        writer.write(data.toString());
+        writer.close();
+    }
+
 }
+
+

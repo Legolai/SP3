@@ -70,6 +70,10 @@ public class MatchProgram {
         return upcomingMatches;
     }
 
+    public ArrayList<ArrayList<Match>> getKnockoutBracket() {
+        return knockoutBracket;
+    }
+
 
     public void advanceKnockoutTournament() {
         ArrayList<TournamentTeam> wonTeams = new ArrayList<>();
