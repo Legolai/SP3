@@ -382,5 +382,5 @@ Program o-- Team
 Program o-- IO
 Program o-- Navigator
 
-Main o-- Program
+Main -- Program
 @enduml
