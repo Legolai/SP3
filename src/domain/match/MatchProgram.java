@@ -3,9 +3,7 @@ package domain.match;
 import domain.team.Team;
 import domain.tournament.TournamentTeam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MatchProgram {
@@ -100,7 +98,7 @@ public class MatchProgram {
     }
 
 
-    public String createMatchProgram() {
+    public String createMatchProgram(String tournamentName) {
         //List<Integer> toursize = (List<Integer>) Arrays.stream(tourSize).boxed();//toList();
         List<Integer> toursize = Arrays.stream(tourSize).boxed().collect(Collectors.toList());
         int nrOfTeams = teams.size();
@@ -108,10 +106,12 @@ public class MatchProgram {
             return "Not valid number of teams";
         }
 
+        int counter = 1;
         for (int i = 0; i < toursize.indexOf(nrOfTeams) + 1; i++) {
             ArrayList<Match> a = new ArrayList<>();
             for (int j = 0; j < nrOfTeams / (2 + i * 2); j++) {
-                Match b = createEmptyMatch();
+                Match b = createEmptyMatch(counter, tournamentName);
+                counter++;
                 a.add(b);
                 allMatches.add(b);
             }
@@ -119,9 +119,9 @@ public class MatchProgram {
         }
         upcomingMatches = knockoutBracket.get(0);
         currentRound = 0;
-        int counter = 0;
+        counter = 0;
 
-        //TODO: random team gen
+        Collections.shuffle(teams);
         for (Match m : upcomingMatches) {   // sets the first round of matches
             m.setTeams(teams.get(counter), teams.get(counter + 1));
             counter += 2;
@@ -130,11 +130,11 @@ public class MatchProgram {
                 " matches have been scheduled (time yet to be set).";
     }
 
-    private Match createEmptyMatch() {
+    private Match createEmptyMatch(int matchCount, String tournamentName) {
         if (scoreOrTime.equals("score")) {
-            return new Match();
+            return new Match(matchCount, tournamentName);
         } else {
-            return new MatchByTime();
+            return new MatchByTime(matchCount, tournamentName);
         }
     }
     //private void createMatch(Team HomeTeam, Team GuestTeam) {}

@@ -1,12 +1,12 @@
 package ui;
 
+import database.DBConnectorIO;
+import database.FileIO;
+import database.IO;
 import domain.team.Team;
 import domain.tournament.Tournament;
-import database.IO;
 import ui.navigation.*;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 
 public class Program {
@@ -22,7 +22,7 @@ public class Program {
         tournaments = new HashMap<>();
         teams = new HashMap<>();
         ui = new UI();
-        io = new IO();
+        io = new DBConnectorIO();
         navigation = new Navigator();
     }
 
@@ -58,20 +58,12 @@ public class Program {
     }
 
     private void loadData() {
-        try {
-            tournaments = io.loadTournaments("src/resources/tournaments.txt");
-            teams = io.loadTeams("src/resources/teams.txt");
-        } catch (FileNotFoundException e) {
-            ui.println(e.getMessage());
-        }
+        tournaments = io.loadTournaments();
+        teams = io.loadTeams();
     }
 
     private void saveData() {
-        try {
-            io.saveTournamentsToDir("src/resources/tournaments", tournaments);
-            io.saveTeamsToFile("src/resources/teams.txt", teams);
-        } catch (IOException e) {
-            ui.println(e.getMessage());
-        }
+        io.saveTournaments(tournaments);
+        io.saveTeams(teams);
     }
 }

@@ -7,6 +7,7 @@ import domain.tournament.TournamentTeam;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,7 +31,7 @@ class TeamHistoryTest {
         team1 = new TournamentTeam(new Team("Team 1", players));
         team2 = new TournamentTeam(new Team("Team 2", players2));
         TournamentTeam[] teams = {team1, team2};
-        Date date = new Date();
+        Instant date = Instant.now();
         match = new Match(teams, date);
         match.setWinner(team1);
     }

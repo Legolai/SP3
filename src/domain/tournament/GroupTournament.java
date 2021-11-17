@@ -17,7 +17,7 @@ public class GroupTournament extends Tournament{
 
     @Override
     public void createMatchProgram(String matchType) {
-        program.createMatchProgram();
+        program.createMatchProgram(this.name);
     }
 
     @Override

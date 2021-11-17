@@ -45,6 +45,7 @@ public class TournamentMenu extends Menu {
 
     private void showConfigMatchFinished(Navigator navigation) {
         ui.newLine();
+
         if(tournament.getMatchProgram().getUpcomingMatches() != null){
             ArrayList<Match> matches = tournament.getMatchProgram().getUpcomingMatches();
             for (int i = 0; i < matches.size(); ++i) {
@@ -116,8 +117,7 @@ public class TournamentMenu extends Menu {
     }
 
     private void showMatchProgram(Navigator navigation) {
-        //TODO: fix allmatches so that it does not crash when trying to get not yet made matches
-        for (Match match : tournament.getMatchProgram().getUpcomingMatches()) {
+        for (Match match : tournament.getMatchProgram().getAllMatches()) {
             ui.println(match.shortToString() + "\n" + match.getDate());
             ui.newLine();
         }

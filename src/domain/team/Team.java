@@ -3,9 +3,18 @@ package domain.team;
 import java.util.ArrayList;
 
 public class Team {
+    private int ID;
     private String name;
     private ArrayList<Player> teamMembers;
     private TeamHistory history;
+
+
+    public Team(int ID, String name, ArrayList<Player> teamMembers) {
+        this.ID = ID;
+        this.name = name;
+        this.teamMembers = teamMembers;
+        history = new TeamHistory(this);
+    }
 
     public Team(String name, ArrayList<Player> teamMembers) {
         this.name = name;
@@ -54,5 +63,9 @@ public class Team {
     @Override
     public String toString() {
         return "Team: " + name + ", Players: " + teamMembers.toString() + ", " + history.getTeamStreak();
+    }
+
+    public int getID() {
+        return this.ID;
     }
 }
