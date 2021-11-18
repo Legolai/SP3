@@ -138,15 +138,23 @@ package ui{
 }
 package database
 {
-    class IO{
-        - Scanner sc
-        + void readFromFile(String path)
-        + void writeToFile(String path)
-        + void saveTournamentToFile(String path, Tournament tournament)
-        + void saveTeamsToFile(String path, HashMap<String, Team> teams)
-        + HashMap<String, Team> loadTeams(String path)
-        + HashMap<String, Tournament> loadTournaments(String path)
-        + void saveTournamentsToDir(String path, HashMap<String, Tournament> tournaments)
+    interface IO{
+        + void saveTournament(String path, Tournament tournament)
+        + void saveTeams(String path, HashMap<String, Team> teams)
+        + HashMap<String, Team> loadTeams()
+        + HashMap<String, Tournament> loadTournaments()
+    }
+    class DBConnectorIO{
+        + void saveTournament(String path, Tournament tournament)
+        + void saveTeams(String path, HashMap<String, Team> teams)
+        + HashMap<String, Team> loadTeams()
+        + HashMap<String, Tournament> loadTournaments()
+    }
+    class FileIO{
+        + void saveTournament(String path, Tournament tournament)
+        + void saveTeams(String path, HashMap<String, Team> teams)
+        + HashMap<String, Team> loadTeams()
+        + HashMap<String, Tournament> loadTournaments()
     }
 }
 
@@ -381,6 +389,9 @@ Program o-- Tournament
 Program o-- Team
 Program o-- IO
 Program o-- Navigator
+
+IO <|.. FileIO
+IO <|.. DBConnectorIO
 
 Main -- Program
 @enduml
