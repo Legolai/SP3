@@ -46,12 +46,12 @@ public class TournamentMenu extends Menu {
     private void showConfigMatchFinished(Navigator navigation) {
         ui.newLine();
 
-        if(tournament.getMatchProgram().getUpcomingMatches() != null){
+        if (tournament.getMatchProgram().getUpcomingMatches() != null) {
             ArrayList<Match> matches = tournament.getMatchProgram().getUpcomingMatches();
             for (int i = 0; i < matches.size(); ++i) {
                 int[] result = matches.get(i).getScore();
                 String newLineIndent = "\n" + " ".repeat(3 + (i + "").length());
-                ui.println("(" + (i + 1) + ") " + matches.get(i).shortToString() + (matches.get(i).getWinner() != null ? newLineIndent + result[0] + " - " + result[1] : "") + newLineIndent + matches.get(i).getDate());
+                ui.println("(" + (i + 1) + ") " + matches.get(i).shortToString() + (matches.get(i).getWinner() != null ? newLineIndent + "Match is finished" : ""));
             }
             ui.newLine();
             String matchIndex = ui.getUserOption("Type the index of the match (b for back):", matches.size() + 1, "b");
@@ -62,13 +62,13 @@ public class TournamentMenu extends Menu {
                     ui.println("Selected match [" + matches.get(index - 1) + "]");
                     int homeScore = Integer.parseInt(ui.getUserInputNumber("Type the score for the home team:"));
                     int guestScore = Integer.parseInt(ui.getUserInputNumber("Type the score for the guest team:"));
-                    matches.get(index - 1).setResult(homeScore, guestScore);
+                    matches.get(index - 1).setResult(homeScore, guestScore, true);
                     tournament.getMatchProgram().advanceKnockoutTournament();
                 } catch (Exception e) {
                     ui.println(e.getMessage());
                 }
             }
-        }else{
+        } else {
             ui.println("The tournament has finished playing");
         }
         ui.waitForUser();

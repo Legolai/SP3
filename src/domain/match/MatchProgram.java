@@ -3,17 +3,20 @@ package domain.match;
 import domain.team.Team;
 import domain.tournament.TournamentTeam;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class MatchProgram {
-    private ArrayList<ArrayList<Match>> knockoutBracket;
+    private final ArrayList<ArrayList<Match>> knockoutBracket;
     private ArrayList<Match> allMatches;        // is this needed?
     private ArrayList<Match> upcomingMatches;   // matches to be played, have to finish before next round
     private int currentRound;
-    private ArrayList<TournamentTeam> teams;
+    private final ArrayList<TournamentTeam> teams;
     //private ArrayList<Team> addedRemovedTeams;
-    private int[] tourSize = {2, 4, 8, 16, 32, 64};
+    private final int[] tourSize = {2, 4, 8, 16, 32, 64};
     private String scoreOrTime = "";
 
     public MatchProgram() {
@@ -98,12 +101,12 @@ public class MatchProgram {
     }
 
 
-    public String createMatchProgram(String tournamentName) {
+    public void createMatchProgram(String tournamentName) {
         //List<Integer> toursize = (List<Integer>) Arrays.stream(tourSize).boxed();//toList();
         List<Integer> toursize = Arrays.stream(tourSize).boxed().collect(Collectors.toList());
         int nrOfTeams = teams.size();
         if (!toursize.contains(nrOfTeams)) {
-            return "Not valid number of teams";
+            return;
         }
 
         int counter = 1;
@@ -126,8 +129,6 @@ public class MatchProgram {
             m.setTeams(teams.get(counter), teams.get(counter + 1));
             counter += 2;
         }
-        return "Matchprogram has been completed, and the first " + knockoutBracket.get(0).size() +
-                " matches have been scheduled (time yet to be set).";
     }
 
     private Match createEmptyMatch(int matchCount, String tournamentName) {
@@ -165,11 +166,33 @@ public class MatchProgram {
 
     @Override
     public String toString() {
-        String msg = "";
+        StringBuilder msg = new StringBuilder();
         for (Match m : allMatches) {
-            msg += m.toString() + "\n";
+            msg.append(m.toString()).append("\n");
         }
-        return msg;
+        return msg.toString();
     }
 
+    public void createMatchProgram(ArrayList<Match> matches) {
+        allMatches = matches;
+        List<Integer> toursize = Arrays.stream(tourSize).boxed().collect(Collectors.toList());
+        int startRound = toursize.indexOf(teams.size());
+
+        int counter = 0;
+        for (int i = 0; i < startRound + 1; i++) {
+            ArrayList<Match> bracket = new ArrayList<>();
+            for (int j = 0; j < teams.size() / (2 + i * 2); j++) {
+                bracket.add(matches.get(counter));
+                counter++;
+            }
+            knockoutBracket.add(bracket);
+        }
+
+        currentRound = 0;
+        upcomingMatches = knockoutBracket.get(currentRound);
+
+        for (int i = startRound; i > 0; i--) {
+            advanceKnockoutTournament();
+        }
+    }
 }

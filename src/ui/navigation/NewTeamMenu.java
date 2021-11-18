@@ -2,7 +2,6 @@ package ui.navigation;
 
 import domain.team.Player;
 import domain.team.Team;
-import domain.team.TeamHistory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +21,7 @@ public class NewTeamMenu extends Menu {
     @Override
     public void show(Navigator navigation) {
         clearScreen();
-        super.showMenu( "b");
+        super.showMenu("b");
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "b")) {
             case "1" -> createNewTeam(navigation);
             default -> navigation.goBack();
@@ -62,6 +61,15 @@ public class NewTeamMenu extends Menu {
     }
 
     private Player createPlayer() {
-        return new Player(ui.getUserInput("Type the name of the player:"));
+        String playerName = ui.getUserInput("Type the name of the player:");
+        int newID = 0;
+        for (Team tm : teams.values()) {
+            for (Player p : tm.getTeamMembers()) {
+                if (p.getID() > newID) {
+                    newID = p.getID();
+                }
+            }
+        }
+        return new Player(newID + 1, playerName);
     }
 }

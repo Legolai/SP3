@@ -7,7 +7,7 @@ import domain.tournament.Tournament;
 import java.util.HashMap;
 
 public class NewTournamentMenu extends Menu {
-    private HashMap<String, Tournament> tournaments;
+    private final HashMap<String, Tournament> tournaments;
 
     public NewTournamentMenu(String name, boolean isHeaderShown, HashMap<String, Tournament> tournaments) {
         super(name, isHeaderShown, new String[]{
@@ -21,7 +21,7 @@ public class NewTournamentMenu extends Menu {
     @Override
     public void show(Navigator navigation) {
         clearScreen();
-        super.showMenu( "b");
+        super.showMenu("b");
         switch ((ui.getUserOption("Select menu: ", getNumberOfOptions(), "b"))) {
             case "1" -> showNewKnockOutTournament(navigation);
             case "2" -> show(navigation);
@@ -39,10 +39,17 @@ public class NewTournamentMenu extends Menu {
     private KnockOutTournament createNewKnockOutTournament() {
         Sport sport = new Sport("Fodbold");
         String nameKOTN = ui.getUserInput("Type the tournaments name: ");
-        if (!tournaments.containsKey(nameKOTN.toLowerCase()))
-            return new KnockOutTournament(nameKOTN, sport);
-        else
+        if (!tournaments.containsKey(nameKOTN.toLowerCase())) {
+            int newID = 0;
+            for (Tournament tn : tournaments.values()) {
+                if (tn.getID() > newID) {
+                    newID = tn.getID();
+                }
+            }
+
+            return new KnockOutTournament(newID + 1, nameKOTN, sport);
+        } else
             ui.println("Tournament already exists!");
-            return createNewKnockOutTournament();
+        return createNewKnockOutTournament();
     }
 }

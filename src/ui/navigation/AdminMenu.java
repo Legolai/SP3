@@ -1,10 +1,5 @@
 package ui.navigation;
 
-import domain.tournament.Tournament;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class AdminMenu extends Menu {
 
     public AdminMenu(String name, boolean isHeaderShown) {
@@ -20,7 +15,7 @@ public class AdminMenu extends Menu {
     @Override
     public void show(Navigator navigation) {
         clearScreen();
-        super.showMenu( "q");
+        super.showMenu("q");
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "q")) {
             case "1" -> navigation.goTo("Tournaments");
             case "2" -> navigation.goTo("New Tournament");

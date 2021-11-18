@@ -1,12 +1,11 @@
 package ui.navigation;
 
-import domain.team.Team;
 import domain.tournament.Tournament;
 
 import java.util.HashMap;
 
 public class TournamentsMenu extends Menu {
-     private HashMap<String, Tournament> tournaments;
+    private final HashMap<String, Tournament> tournaments;
 
     public TournamentsMenu(String name, boolean isHeaderShown, HashMap<String, Tournament> tournaments) {
         super(name, isHeaderShown, new String[]{
@@ -44,8 +43,12 @@ public class TournamentsMenu extends Menu {
         StringBuilder s = new StringBuilder();
         for (String key : tournaments.keySet()) {
             s.append(tournaments.get(key).getName()).append(", ");
-            if(s.length() > 40){ ui.println(s.toString()); s = new StringBuilder();}
+            if (s.length() > 40) {
+                ui.println(s.toString());
+                s = new StringBuilder();
+            }
         }
+        ui.println(s.toString());
         ui.newLine();
         ui.waitForUser();
         show(navigation);

@@ -1,6 +1,6 @@
 package ui.navigation;
 
-public class StartMenu extends Menu{
+public class StartMenu extends Menu {
     public StartMenu(String name, boolean isHeaderShown) {
         super(name, isHeaderShown, new String[]{
                 "Log in (Admin)",
@@ -12,7 +12,7 @@ public class StartMenu extends Menu{
     @Override
     public void show(Navigator navigation) {
         clearScreen();
-        super.showMenu( "q");
+        super.showMenu("q");
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "q")) {
             case "1" -> logInAdmin(navigation);
             case "2" -> navigation.goTo("New team");
@@ -20,16 +20,16 @@ public class StartMenu extends Menu{
         }
     }
 
-    private void logInAdmin(Navigator navigation){
-       String username = ui.getUserInput("Username:");
-       String password = ui.getUserInput("Password:");
+    private void logInAdmin(Navigator navigation) {
+        String username = ui.getUserInput("Username:");
+        String password = ui.getUserInput("Password:");
 
-       if(username.equalsIgnoreCase("Admin") && password.equals("Admin")){
-           navigation.goTo("Admin");
-       }else {
-           ui.println("Wrong username or password!");
-           ui.waitForUser();
-           show(navigation);
-       }
+        if (username.equalsIgnoreCase("Admin") && password.equals("Admin")) {
+            navigation.goTo("Admin");
+        } else {
+            ui.println("Wrong username or password!");
+            ui.waitForUser();
+            show(navigation);
+        }
     }
 }

@@ -17,8 +17,8 @@ class TeamTest {
 
     @BeforeEach
     void setUp() {
-        player1 = new Player("Michael");
-        player2 = new Player("Nicolai");
+        player1 = new Player(1,"Michael");
+        player2 = new Player(2,"Nicolai");
         players = new ArrayList<>();
         players.add(player1);
         players.add(player2);

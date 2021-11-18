@@ -1,9 +1,4 @@
-Tournament 2020,Fodbold,
-Tournament 2021,Fodbold,
-Tournament 2022,Fodbold,
-Tournament 2023,Fodbold,
-Tournament 2024,Fodbold,
-Tournament 2017,Fodbold,
-Tournament 2018,Fodbold,
-Tournament 2019,Fodbold,
-newTournament,Fodbold,
+ID, Name, sport_name
+1, Bordfodboldstunering 2021, Bordfodbold
+2, Bordfodboldstunering 2022, Bordfodbold
+3, Bordfodboldstunering 2023, Bordfodbold

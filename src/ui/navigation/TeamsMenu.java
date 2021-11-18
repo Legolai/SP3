@@ -1,7 +1,6 @@
 package ui.navigation;
 
 import domain.team.Team;
-import domain.tournament.Tournament;
 
 import java.util.HashMap;
 
@@ -21,7 +20,7 @@ public class TeamsMenu extends Menu {
     @Override
     public void show(Navigator navigation) {
         clearScreen();
-        super.showMenu( "b");
+        super.showMenu("b");
         switch (ui.getUserOption("Select menu:", getNumberOfOptions(), "b")) {
             case "1" -> showAllTeams(navigation);
             case "2" -> goToTeam(navigation);
@@ -41,9 +40,16 @@ public class TeamsMenu extends Menu {
     }
 
     private void showAllTeams(Navigator navigation) {
-        for (String key: teams.keySet()) {
-            ui.println(teams.get(key).getName());
+        ui.newLine();
+        StringBuilder s = new StringBuilder();
+        for (Team tm : teams.values()) {
+            s.append(tm.getName()).append(", ");
+            if (s.length() > 40) {
+                ui.println(s.toString());
+                s = new StringBuilder();
+            }
         }
+        ui.println(s.toString());
         ui.waitForUser();
         show(navigation);
     }

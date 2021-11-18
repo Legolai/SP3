@@ -28,9 +28,9 @@ class GroupTest {
 
     @BeforeEach
     void setUp() {
-        player1 = new Player("Michael");
-        player2 = new Player("Nicolai");
-        player3 = new Player("Oscar");
+        player1 = new Player(1,"Michael");
+        player2 = new Player(2,"Nicolai");
+        player3 = new Player(3,"Oscar");
         ArrayList<Player> a = new ArrayList<>();
         a.add(player1);
         a.add(player2);
@@ -38,8 +38,8 @@ class GroupTest {
         team6 = new Team("Hold 6",a);
         tt6 = new TournamentTeam(team6);
 
-        player4 = new Player("Jesper");
-        player5 = new Player("Tess");
+        player4 = new Player(4,"Jesper");
+        player5 = new Player(5,"Tess");
         team2.addMember(player4);
         team2.addMember(player5);
         tt2 = new TournamentTeam(team2);

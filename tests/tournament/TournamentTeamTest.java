@@ -20,9 +20,9 @@ class TournamentTeamTest {
 
     @BeforeEach
     void setUp() {
-        player1 = new Player("Michael");
-        player2 = new Player("Nicolai");
-        player3 = new Player("Oscar");
+        player1 = new Player(1,"Michael");
+        player2 = new Player(2,"Nicolai");
+        player3 = new Player(3,"Oscar");
         ArrayList<Player> a = new ArrayList<>();
         a.add(player1);
         a.add(player2);

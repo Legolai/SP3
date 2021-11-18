@@ -5,7 +5,7 @@ import domain.match.MatchProgram;
 import java.util.ArrayList;
 
 public abstract class Tournament {
-    protected int id;
+    protected int ID;
     protected String name;
     protected Sport tournamentType;
     protected ArrayList<TournamentTeam> contenders;
@@ -21,14 +21,24 @@ public abstract class Tournament {
         history = new ArrayList<>();
     }
 
-    public Tournament(int id, String name, Sport tournamentType, ArrayList<TournamentTeam> contenders)  {      //DB consturctor with no macth_games
-        this.id = id;
+    public Tournament(int ID, String name, Sport tournamentType) {      //is the rest needed immediately?
+        this.ID = ID;
+        this.name = name;
+        this.tournamentType = tournamentType;
+        contenders = new ArrayList<>();
+        program = new MatchProgram(contenders);
+        history = new ArrayList<>();
+    }
+
+    public Tournament(int ID, String name, Sport tournamentType, ArrayList<TournamentTeam> contenders) {      //DB consturctor with no macth_games
+        this.ID = ID;
         this.name = name;
         this.tournamentType = tournamentType;
         this.contenders = contenders;
         program = new MatchProgram(this.contenders);
         history = new ArrayList<>();
     }
+
 
     public Tournament(String name, Sport tournamentType, ArrayList<TournamentTeam> contenders) {
         this.name = name;
@@ -68,6 +78,6 @@ public abstract class Tournament {
     }
 
     public int getID() {
-        return this.id;
+        return this.ID;
     }
 }

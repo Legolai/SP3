@@ -1,7 +1,5 @@
 package domain.match;
 
-import java.util.Date;
-
 public class MatchResult {
     int homeScore;
     int guestScore;
@@ -16,7 +14,7 @@ public class MatchResult {
         this.homeScore = homeScore;
     }
 
-    public int[] calculateScore(){
+    public int[] calculateScore() {
         return new int[]{homeScore - guestScore, guestScore - homeScore};
     }
 

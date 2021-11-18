@@ -10,6 +10,7 @@ public class TournamentTeam {
     public TournamentTeam(Team team) {
         this.team = team;
     }
+
     public TournamentTeam(Team team, int point, int score) {
         this.team = team;
         this.point = point;

@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 public class Navigator {
 
-    private HashMap<String, Menu> navigation;
-    private ArrayList<String> previousMenus;
+    private final HashMap<String, Menu> navigation;
+    private final ArrayList<String> previousMenus;
 
     public Navigator() {
         navigation = new HashMap<>();

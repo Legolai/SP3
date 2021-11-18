@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,13 +26,13 @@ class TeamHistoryTest {
     void setUp() {
         players = new ArrayList<>();
         players2 = new ArrayList<>();
-        Player player1 = new Player("Player 1");
-        Player player2 = new Player("player2");
+        Player player1 = new Player(1,"Player 1");
+        Player player2 = new Player(2,"player2");
         players.add(player1);
         team1 = new TournamentTeam(new Team("Team 1", players));
         team2 = new TournamentTeam(new Team("Team 2", players2));
         TournamentTeam[] teams = {team1, team2};
-        Instant date = Instant.now();
+        LocalDateTime date = LocalDateTime.now();
         match = new Match(teams, date);
         match.setWinner(team1);
     }

@@ -3,19 +3,23 @@ package ui.navigation;
 import domain.team.Player;
 import domain.team.Team;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class TeamMenu extends Menu {
 
     private Team team;
+    private final HashMap<String, Team> teams;
 
-    public TeamMenu(String name, boolean isHeaderShown) {
+
+    public TeamMenu(String name, boolean isHeaderShown, HashMap<String, Team> teams) {
         super(name, isHeaderShown, new String[]{
                 "View all team members",
                 "Edit Team members",
                 "View Stats",
                 "Go back"
         });
+        this.teams = teams;
     }
 
     @Override
@@ -80,7 +84,16 @@ public class TeamMenu extends Menu {
     }
 
     private void showAddnewMember(Navigator navigation) {
-        team.addMember(new Player(ui.getUserInput("Type the name of the new player:")));
+        String playerName = ui.getUserInput("Type the name of the new player:");
+        int newID = 0;
+        for (Team tm : teams.values()) {
+            for (Player p : tm.getTeamMembers()) {
+                if (p.getID() > newID) {
+                    newID = p.getID();
+                }
+            }
+        }
+        team.addMember(new Player(newID + 1, playerName));
         showEditTeamMembers(navigation);
     }
 

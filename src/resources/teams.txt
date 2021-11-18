@@ -1,4 +1,19 @@
-Guldgraverne, Oscar, Nicolai, , 
-De farlige sørøver, Oscar, Nicolai, , 
-De vilde hunde, Oscar, Nicolai, , 
-De hurtige knægte, Oscar, Nicolai, , 
+team_id, team_name
+1, De hurtige knægte
+2, De farlige sørøver
+3, Guldgraverne
+4, De vilde hunde
+5, BetaHouse
+6, Stjernerne
+7, Dreamteam
+8, Lærerne
+9, Hestepigerne
+10, Prisjægerne
+11, Unidad
+12, Zoomerne
+13, Boomerne
+14, De løse håndled
+15, Spinners
+16, Lektiehjælperne
+18, De farverige fisker
+19, De langsome orme

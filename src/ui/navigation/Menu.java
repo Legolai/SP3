@@ -1,16 +1,11 @@
 package ui.navigation;
 
-import domain.match.Match;
-import domain.team.Team;
-import domain.tournament.Tournament;
 import ui.UI;
 
-import java.util.HashMap;
-
 public abstract class Menu {
-    private final String[] msgOptions;
     protected final String name;
     protected final UI ui;
+    private final String[] msgOptions;
     private final boolean isHeaderShown;
 
     public Menu(String name, boolean isHeaderShown) {
@@ -40,7 +35,7 @@ public abstract class Menu {
         ui.println("---| " + customHeader + " |---");
     }
 
-    private void showOptions(String lastOptionKey){
+    private void showOptions(String lastOptionKey) {
         if (msgOptions.length != 0) {
             ui.printOptions(msgOptions, lastOptionKey);
         }

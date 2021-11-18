@@ -44,8 +44,8 @@ public class UI {
         sc = new Scanner(System.in);
         print(msg + " ");
         String s = sc.next();
-        for (char ch: s.toCharArray()) {
-            if(!Character.isDigit(ch)){
+        for (char ch : s.toCharArray()) {
+            if (!Character.isDigit(ch)) {
                 println("Invalid input!");
                 s = getUserInputNumber(msg);
                 break;
@@ -85,9 +85,9 @@ public class UI {
     }
 
     public void clear() {
-        try{
+        try {
             String operatingSystem = System.getProperty("os.name"); //Check the current operating system
-            if(operatingSystem.contains("Windows")){
+            if (operatingSystem.contains("Windows")) {
                 ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls");
                 Process startProcess = pb.inheritIO().start();
 
@@ -98,7 +98,7 @@ public class UI {
 
                 startProcess.waitFor();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

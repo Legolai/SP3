@@ -1,9 +1,11 @@
 package domain.team;
 
 public class Player {
+    private final int ID;
     private String name;
 
-    public Player(String name) {
+    public Player(int ID, String name) {
+        this.ID = ID;
         this.name = name;
     }
 
@@ -15,8 +17,12 @@ public class Player {
         this.name = name;
     }
 
+    public int getID() {
+        return ID;
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.name;
     }
 }

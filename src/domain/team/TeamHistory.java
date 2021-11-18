@@ -25,6 +25,10 @@ public class TeamHistory {
         return teamStreak;
     }
 
+    public void setTeamStreak(LinkedHashMap<String, Integer> teamStreak) {
+        this.teamStreak = teamStreak;
+    }
+
     public void addMatch(Match match) {
         matches.add(match);
         updateTeamStreak(match);
@@ -44,10 +48,6 @@ public class TeamHistory {
             s = "Losses";
         }
         teamStreak.put(s, teamStreak.get(s) + 1);
-    }
-
-    public void setTeamStreak(LinkedHashMap<String, Integer> teamStreak) {
-        this.teamStreak = teamStreak;
     }
 
     public LinkedHashMap<String, Integer> getTournamentHistoryResults() {

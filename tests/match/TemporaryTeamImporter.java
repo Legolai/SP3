@@ -28,8 +28,9 @@ public class TemporaryTeamImporter {
                 String teamname = splitted.get(0);
                 splitted.remove(0);
                 ArrayList<Player> players = new ArrayList<>();
+                int counter = 1;
                 for(String s : splitted) {
-                    players.add(new Player(s));
+                    players.add(new Player(counter++, s));
                 }
                 teams.add(new Team(teamname,players));
             }
