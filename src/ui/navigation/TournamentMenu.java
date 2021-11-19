@@ -21,6 +21,7 @@ public class TournamentMenu extends Menu {
                 "Config finished match", // option 4
                 "View match program", // option 5
                 "View bracket", // option 6
+                "Start tournament", // option 7
                 "Go back" // option go back
         });
         this.teams = teams;
@@ -44,6 +45,14 @@ public class TournamentMenu extends Menu {
             case "4" -> showConfigMatchFinished(navigation);
             case "5" -> showMatchProgram(navigation);
             case "6" -> show(navigation, tournament); // TODO: fancy bracket
+            case "7" -> {
+                ui.println("The tournament has "+(tournament.getMatchProgram().getUpcomingMatches() != null ? "already " : "")+"begun");
+                if(tournament.getMatchProgram().getUpcomingMatches() == null){
+                    tournament.createMatchProgram("SCORE");
+                }
+                ui.waitForUser();
+                show(navigation, tournament);
+            }
             default -> navigation.goBack();
         }
     }
@@ -51,14 +60,27 @@ public class TournamentMenu extends Menu {
     private void showEditContenders(Navigator navigation) {
         clearScreen();
         super.showCustomHeader(tournament.getName());
+        boolean isBegun = tournament.getMatchProgram().getUpcomingMatches() != null;
         ui.printOptions(new String[]{
-                "Add contender" + (tournament.getMatchProgram() != null ?"(The tournament has begun)":""),
-                "Remove contender" + (tournament.getMatchProgram() != null ?"(The tournament has begun)":""),
+                "Add contender" + ( isBegun ?"(The tournament has begun)":""),
+                "Remove contender" + (isBegun ?"(The tournament has begun)":""),
                 "Go back"
         }, "b");
         switch (ui.getUserOption("Select action:", getNumberOfOptions(), "b")) {
-            case "1" -> showAddNewContender(navigation);
-            case "2" -> showRemoveContender(navigation);
+            case "1" -> {
+                if (isBegun) {
+                    show(navigation, tournament);
+                } else {
+                    showAddNewContender(navigation);
+                }
+            }
+            case "2" -> {
+                if(isBegun){
+                    show(navigation, tournament);
+                }else {
+                    showRemoveContender(navigation);
+                }
+            }
             default -> show(navigation, tournament);
         }
     }
@@ -204,7 +226,7 @@ public class TournamentMenu extends Menu {
 
     private void showMatchProgram(Navigator navigation) {
         for (Match match : tournament.getMatchProgram().getAllMatches()) {
-            ui.println(match.shortToString() + "\n" + match.getDate());
+            ui.println(match.shortToString() + "\n");
             ui.newLine();
         }
 

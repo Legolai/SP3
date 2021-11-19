@@ -112,7 +112,7 @@ public class MatchProgram {
         int counter = 1;
         for (int i = 0; i < toursize.indexOf(nrOfTeams) + 1; i++) {
             ArrayList<Match> a = new ArrayList<>();
-            for (int j = 0; j < nrOfTeams / (2 + i * 2); j++) {
+            for (int j = 0; j < nrOfTeams / Math.pow(2,i) / 2 ; j++) {
                 Match b = createEmptyMatch(counter, tournamentName);
                 counter++;
                 a.add(b);
@@ -181,7 +181,7 @@ public class MatchProgram {
         int counter = 0;
         for (int i = 0; i < startRound + 1; i++) {
             ArrayList<Match> bracket = new ArrayList<>();
-            for (int j = 0; j < teams.size() / (2 + i * 2); j++) {
+            for (int j = 0; j < teams.size() / Math.pow(2,i) / 2; j++) {
                 bracket.add(matches.get(counter));
                 counter++;
             }
