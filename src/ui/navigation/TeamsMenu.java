@@ -1,7 +1,9 @@
 package ui.navigation;
 
 import domain.team.Team;
+import domain.tournament.Tournament;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TeamsMenu extends Menu {
@@ -29,13 +31,33 @@ public class TeamsMenu extends Menu {
     }
 
     private void goToTeam(Navigator navigation) {
-        String teamName = ui.getUserInput("Type the team's name:").toLowerCase();
-        if (teams.containsKey(teamName)) {
-            ((TeamMenu) navigation.goManuelTo("Team")).show(navigation, teams.get(teamName));
-        } else {
-            ui.println("The team " + teamName + " does not exist");
-            ui.waitForUser();
-            show(navigation);
+        StringBuilder s = new StringBuilder();
+        int memberNum = 1;
+        ArrayList<Team> tms = new ArrayList<>(teams.values());
+        for (Team tm: tms) {
+            s.append("(").append(memberNum).append(")").append(tm.getName()).append(", ");
+            if (s.length() > 40) {
+                ui.println(s.toString());
+                s = new StringBuilder();
+            }
+            ++memberNum;
+        }
+        ui.println(s.toString());
+
+        String memberIndex = ui.getUserOption("Type the index of the team (b for back):", tms.size()+1,"b");
+
+        try{
+            int index = Integer.parseInt(memberIndex);
+            String teamName = tms.get(index-1).getName().toLowerCase();
+            if (teams.containsKey(teamName)) {
+                ((TeamMenu) navigation.goManuelTo("Team")).show(navigation, teams.get(teamName));
+            } else {
+                ui.println("The team " + teamName + " does not exist");
+                ui.waitForUser();
+                show(navigation);
+            }
+        } catch (NumberFormatException e){
+            e.printStackTrace();
         }
     }
 

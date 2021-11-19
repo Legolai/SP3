@@ -65,6 +65,14 @@ public abstract class Tournament {
         return contenders;
     }
 
+    public void addContender(TournamentTeam team) {
+        contenders.add(team);
+    }
+
+    public void removeContender(TournamentTeam team) {
+        contenders.remove(team);
+    }
+
     public MatchProgram getMatchProgram() {
         return program;
     }

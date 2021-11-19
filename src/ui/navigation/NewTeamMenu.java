@@ -54,7 +54,14 @@ public class NewTeamMenu extends Menu {
             }
         }
 
-        teams.put(teamName.toLowerCase(), new Team(teamName, members));
+        int newID = 0;
+        for (Team tm : teams.values()) {
+            if (tm.getID() > newID) {
+                newID = tm.getID();
+            }
+        }
+
+        teams.put(teamName.toLowerCase(), new Team(newID+1,teamName, members));
 
         navigation.setCurrentMenu("Teams");
         ((TeamMenu) navigation.goManuelTo("Team")).show(navigation, teams.get(teamName.toLowerCase()));

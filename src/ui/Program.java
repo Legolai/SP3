@@ -48,7 +48,7 @@ public class Program {
         navigation.addDestination(new StartMenu("Start", true));
         navigation.addDestination(new AdminMenu("Admin", true));
         navigation.addDestination(new TournamentsMenu("Tournaments", true, tournaments));
-        navigation.addDestination(new TournamentMenu("Tournament", false));
+        navigation.addDestination(new TournamentMenu("Tournament", false, teams));
         navigation.addDestination(new NewTournamentMenu("New Tournament", true, tournaments));
         navigation.addDestination(new TeamsMenu("Teams", true, teams));
         navigation.addDestination(new TeamMenu("Team", false, teams));
